@@ -15,8 +15,6 @@ export function Navbar() {
         <Item to="/Introduction">감정 소개!</Item>
         <Item to="/Processing">감정 정리!</Item>
         <Item to="/Warehouse">감정 창고!</Item>
-        <Item to="/Null1">Null1</Item>
-        <Item to="/Null2">Null2</Item>
       </Home>
       <Outlet />
     </>
