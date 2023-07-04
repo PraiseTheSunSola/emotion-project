@@ -53,11 +53,12 @@ export function Regulation() {
   // 스크롤 위치에 따라 이미지의 투명도를 조정하는 애니메이션 값 생성
   const imageOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
   const textOpacity1 = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
-  const textOpacity2 = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
+  const textOpacity2 = useTransform(scrollYProgress, [0.15, 0.2], [0, 1]);
   // 스크롤 위치에 따라 이미지의 크기를 조정하는 애니메이션 값 생성
   const imageScale = useTransform(scrollYProgress, [0, 1], [1.5, 0.3]);
   const textColor = useTransform(scrollYProgress, [0, 1], ["white", "red"]);
-  const height = useTransform(scrollYProgress, [0, 0.09], [0, 280]);
+  const height1 = useTransform(scrollYProgress, [0, 0.09], [0, 280]);
+  const height2 = useTransform(scrollYProgress, [0, 0.5], [280, 0]);
   return (
     <>
       <Page>
@@ -70,7 +71,7 @@ export function Regulation() {
               scale: imageScale,
             }}
           />
-          <ScrollBar1 style={{ height: height, opacity: textOpacity1 }}>
+          <ScrollBar1 style={{ height: height1, opacity: textOpacity1 }}>
             <H1>아침과 함께 우리의 감정도 눈을 뜬다.</H1>
           </ScrollBar1>
 
@@ -83,7 +84,7 @@ export function Regulation() {
             }}
           />
 
-          <ScrollBar2>
+          <ScrollBar2 style={{ height: height2, opacity: textOpacity2 }}>
             <H1>아침과 함께 우리의 감정도 눈을 뜬다.</H1>
           </ScrollBar2>
 
