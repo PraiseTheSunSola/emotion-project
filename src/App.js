@@ -1,20 +1,16 @@
-// import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from "styled-components";
 import { Emotion } from "./Project/Emotion";
 
-// const Body = createGlobalStyle`
-// body {
-//   margin: 0;
-//   padding: 0;
-//   width: 100vw;
-//   height: 100vh;
-//   background-color: whitesmoke;
-// }
-// `;
+const Body = createGlobalStyle`
+body {
+  overflow-x: hidden;
+}
+`;
 
 function App() {
   return (
     <>
-      {/* <Body /> */}
+      <Body />
       <Emotion />
     </>
   );
