@@ -6,7 +6,15 @@ import Regulation4 from "../img/Regulation4.jpg";
 import Regulation5 from "../img/Regulation5.jpg";
 import Regulation6 from "../img/Regulation6.png";
 import Regulation7 from "../img/Regulation7.png";
-import { motion, useScroll, useTransform } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
+
 const Page = styled.div`
   width: 100vw;
   background-color: black;
@@ -104,56 +112,63 @@ const H7 = styled(motion.h1)`
   top: 270px;
   left: 200px;
   color: white;
-  /* & {
-    animation-duration: 4s;
-    animation-name: rainbowLink;
-    animation-iteration-count: infinite;
-  }
-  @keyframes rainbowLink {
-    0% {
-      width: 100px;
-      /* height: 100px; */
-      /* background-color: whitesmoke;
-      color: black;
-    }
-    15% {
-      background-color: whitesmoke;
-      color: black;
-    }
-    30% {
-      background-color: whitesmoke;
-      color: black;
-    }
-    45% {
-      background-color: whitesmoke;
-      color: black;
-    }
-    60% {
-      background-color: whitesmoke;
-      color: black;
-    }
-    75% {
-      background-color: whitesmoke;
-      color: black;
-    }
-    90% {
-      background-color: whitesmoke;
-      color: black;
-    }
-    100% {
-      width: 400px;
-      background-color: whitesmoke;
-      color: black;
-    } */
-  } */
 `;
 
+const NavButtonCircle = styled(motion.div)`
+  position: relative;
+  position: fixed;
+  top: 50px;
+  right: 100px;
+  width: 250px;
+  height: 200px;
+  /* background-color: red; */
+`;
+
+const NavButton = styled(motion.button)`
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  transform-origin: center center;
+  top: 30%;
+  left: 40%;
+`;
+
+const Buttons = styled(motion.div)`
+  position: absolute;
+  top: 60%;
+  left: 16%;
+`;
+
+const BackButton = styled(motion.button)`
+  width: 50px;
+  height: 50px;
+`;
+
+const MainButton = styled(motion.button)`
+  width: 50px;
+  height: 50px;
+  margin-left: 10px;
+  margin-right: 10px;
+`;
+
+const NextButton = styled(motion.NavLink)`
+  width: 50px;
+  height: 50px;
+  background-color: white;
+`;
+
+const inout = {
+  start: { opacity: 0, scale: 0 },
+  end: { opacity: 1, scale: 1, rotateZ: 0, transition: { type: "spring" } },
+  exit: { opacity: 0, scale: 0, rotateZ: 0 },
+};
+
 export function Regulation() {
+  const [show, setShow] = useState(false);
+  function clickButton() {
+    setShow((appear) => !appear);
+  }
   const { scrollYProgress } = useScroll();
-  // 이미지 투명도
-  // const imageOpacity = useTransform(scrollYProgress, [0, 1], [1, 1]);
-  // 이미지 크기
-  // const imageScale = useTransform(scrollYProgress, [0, 1], [1.5, 0.5]);
 
   //  텍스트  투명도
   const scrollOpacity1 = useTransform(scrollYProgress, [0, 0.09], [1, 0]);
@@ -231,9 +246,46 @@ export function Regulation() {
   //   [0.89, 0.9, 0.98, 1.5],
   //   [0, 0.5, 1, 0]
   // );
+
   return (
     <>
       <Page>
+        <NavButtonCircle>
+          <NavButton onClick={clickButton}>클릭</NavButton>
+          <AnimatePresence>
+            {show ? (
+              <Buttons>
+                <BackButton
+                  variants={inout}
+                  initial="start"
+                  animate="end"
+                  exit="exit"
+                >
+                  이전
+                </BackButton>
+
+                <MainButton
+                  variants={inout}
+                  initial="start"
+                  animate="end"
+                  exit="exit"
+                >
+                  메인
+                </MainButton>
+
+                <NextButton
+                  to="/Introduction"
+                  variants={inout}
+                  initial="start"
+                  animate="end"
+                  exit="exit"
+                >
+                  다음
+                </NextButton>
+              </Buttons>
+            ) : null}
+          </AnimatePresence>
+        </NavButtonCircle>
         <ImageBox>
           <Img
             src={Regulation3}
