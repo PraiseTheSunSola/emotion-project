@@ -13,7 +13,7 @@ import {
   useTransform,
 } from "framer-motion";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Page = styled.div`
   width: 100vw;
@@ -151,10 +151,14 @@ const MainButton = styled(motion.button)`
   margin-right: 10px;
 `;
 
-const NextButton = styled(motion.NavLink)`
+const NextButton = styled(motion.button)`
   width: 50px;
   height: 50px;
-  background-color: white;
+`;
+
+const StyledLink = styled(Link)`
+  color: black;
+  text-decoration: none;
 `;
 
 const inout = {
@@ -168,6 +172,9 @@ export function Regulation() {
   function clickButton() {
     setShow((appear) => !appear);
   }
+
+  // const navigate = useNavigate();
+
   const { scrollYProgress } = useScroll();
 
   //  텍스트  투명도
@@ -260,6 +267,7 @@ export function Regulation() {
                   initial="start"
                   animate="end"
                   exit="exit"
+                  // onClick={() => navigate(-1)}
                 >
                   이전
                 </BackButton>
@@ -274,13 +282,12 @@ export function Regulation() {
                 </MainButton>
 
                 <NextButton
-                  to="/Introduction"
                   variants={inout}
                   initial="start"
                   animate="end"
                   exit="exit"
                 >
-                  다음
+                  <StyledLink to="/Introduction">다음</StyledLink>
                 </NextButton>
               </Buttons>
             ) : null}
