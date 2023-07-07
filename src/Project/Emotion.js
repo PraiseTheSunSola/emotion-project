@@ -11,8 +11,8 @@ export function Emotion() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/Homepage" element={<Homepage />} />
-          <Route path="/" element={<Navbar />}>
+          <Route path="/" element={<Homepage />} />
+          <Route path="" element={<Navbar />}>
             <Route path="/Regulation" element={<Regulation />} />
             <Route path="/Introduction" element={<Introduction />} />
             <Route path="/Processing" element={<Processing />} />

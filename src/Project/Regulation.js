@@ -17,7 +17,6 @@ import { Link } from "react-router-dom";
 
 const Page = styled.div`
   width: 100vw;
-  background-color: black;
   overflow: hidden;
 `;
 const ImageBox = styled.div`
@@ -119,10 +118,10 @@ const H7 = styled(motion.h1)`
 const NavButtonCircle = styled(motion.div)`
   position: relative;
   position: fixed;
-  top: 50px;
-  right: 100px;
-  width: 250px;
-  height: 200px;
+  top: 50%;
+  right: 10px;
+  width: 50px;
+  height: 250px;
   /* background-color: red; */
 `;
 
@@ -131,14 +130,13 @@ const NavButton = styled(motion.button)`
   width: 50px;
   height: 50px;
   transform-origin: center center;
-  top: 30%;
-  left: 40%;
+  /* top: 30%;
+  left: 40%; */
 `;
 
 const Buttons = styled(motion.div)`
   position: absolute;
-  top: 60%;
-  left: 16%;
+  top: 30%;
 `;
 
 const BackButton = styled(motion.button)`
@@ -149,8 +147,8 @@ const BackButton = styled(motion.button)`
 const MainButton = styled(motion.button)`
   width: 50px;
   height: 50px;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 `;
 
 const NextButton = styled(motion.button)`
@@ -222,34 +220,34 @@ export function Regulation() {
   const color1 = useTransform(
     scrollYProgress,
     [0, 0.02, 0.09],
-    ["white", "white", "white"]
+    ["black", "black", "black"]
   );
   const color2 = useTransform(
     scrollYProgress,
     [0.15, 0.2, 0.29],
-    ["white", "white", "white"]
+    ["black", "black", "black"]
   );
   const color3 = useTransform(
     scrollYProgress,
     [0.29, 0.31, 0.33, 0.38, 0.45],
-    ["white", "white", "white", "white", "white"]
+    ["black", "black", "black", "black", "black"]
   );
   const color4 = useTransform(
     scrollYProgress,
     [0.45, 0.46, 0.52, 0.6],
-    ["white", "white", "white", "white"]
+    ["black", "black", "black", "black"]
   );
 
   const color5 = useTransform(
     scrollYProgress,
     [0.6, 0.61, 0.63, 0.69, 0.75],
-    ["white", "white", "white", "white", "white"]
+    ["black", "black", "black", "black", "black"]
   );
 
   const color6 = useTransform(
     scrollYProgress,
     [0.75, 0.76, 0.84, 0.89],
-    ["white", "white", "white", "white"]
+    ["black", "black", "black", "black"]
   );
 
   // const color7 = useTransform(
@@ -281,7 +279,7 @@ export function Regulation() {
                   animate="end"
                   exit="exit"
                 >
-                  <StyledLink to="/Homepage">메인</StyledLink>
+                  <StyledLink to="/">메인</StyledLink>
                 </MainButton>
 
                 <NextButton

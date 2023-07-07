@@ -1,10 +1,13 @@
 import Anger from "../Emotions/1Anger.png";
 import Disillusionment from "../Emotions/2Disillusionment.jpg";
-import frustrating from "../Emotions/3frustrating.jpg";
-import tantrum from "../Emotions/4tantrum.jpg";
+import Frustrating from "../Emotions/3frustrating.jpg";
+import Tantrum from "../Emotions/4tantrum.jpg";
 import Pigritia from "../Emotions/5Pigritia.jpg";
-import malice from "../Emotions/6malice.jpg";
-import selfProtection from "../Emotions/7selfProtection.jpg";
+import Malice from "../Emotions/6malice.jpg";
+import SelfProtection from "../Emotions/7selfProtection.jpg";
+import Irritate from "../Emotions/8Irritate.jpg";
+import Disgust from "../Emotions/9disgust.jpg";
+import Fury from "../Emotions/10Fury.jpg";
 const EmotionKind = [
   {
     id: 1,
@@ -21,13 +24,13 @@ const EmotionKind = [
   {
     id: 3,
     title: "짜증",
-    image: frustrating,
+    image: Frustrating,
     text: "자신의 욕구 실현이 저지당하거나 어떤 일을 강요당했을 때, 이에 저항하기 위해 생기는 부정적인 정서 상태",
   },
   {
     id: 4,
     title: "투정",
-    image: tantrum,
+    image: Tantrum,
     text: "엇이 모자라거나 못마땅하여 떼를 쓰며 조르는 일",
   },
   {
@@ -39,14 +42,35 @@ const EmotionKind = [
   {
     id: 6,
     title: "악의",
-    image: malice,
+    image: Malice,
     text: "다른 사람을 해치려고 하는 또는 무엇이 잘못되기를 바라는 나쁜 마음",
   },
   {
     id: 7,
     title: "자기방어",
-    image: selfProtection,
+    image: SelfProtection,
     text: "원초아의 위협적인 충동을 불러일으키는 외부의 실재나 사건을 아예 인정하려 하지 않는 것",
+  },
+
+  {
+    id: 8,
+    title: "안달",
+    image: Irritate,
+    text: "속마음이 뜨거워져 조급해지는것",
+  },
+
+  {
+    id: 9,
+    title: "DISGUST(혐오)",
+    image: Disgust,
+    text: "특정 대상을 싫어하고 미워하는 감정",
+  },
+
+  {
+    id: 10,
+    title: "격노",
+    image: Fury,
+    text: "몹시 분하고 노여운 감정이 북받쳐 오름",
   },
 ];
 

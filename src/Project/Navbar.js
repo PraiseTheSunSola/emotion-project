@@ -11,10 +11,10 @@ export function Navbar() {
     <>
       <Home>
         <Page to="/"></Page>
-        <Page to="/Regulation">감정 정리?</Page>
-        <Page to="/Introduction">감정 소개!</Page>
-        <Page to="/Processing">감정 정리!</Page>
-        <Page to="/Warehouse">감정 창고!</Page>
+        <Page to="/Regulation">감정 정리</Page>
+        <Page to="/Introduction">감정 종류</Page>
+        <Page to="/Processing">정리 하기</Page>
+        <Page to="/Warehouse">감정 창고</Page>
       </Home>
       <Outlet />
     </>
