@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const NavButtonCircle = styled(motion.div)`
   position: relative;

@@ -13,7 +13,7 @@ import {
   useTransform,
 } from "framer-motion";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Page = styled.div`
   width: 100vw;
