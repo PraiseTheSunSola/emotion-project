@@ -114,6 +114,8 @@ const H7 = styled(motion.h1)`
   color: white;
 `;
 
+// ------------------------------------------- 버튼
+
 const NavButtonCircle = styled(motion.div)`
   position: relative;
   position: fixed;
@@ -166,6 +168,8 @@ const inout = {
   end: { opacity: 1, scale: 1, rotateZ: 0, transition: { type: "spring" } },
   exit: { opacity: 0, scale: 0, rotateZ: 0 },
 };
+
+// ------------------------------------------- 버튼
 
 export function Regulation() {
   const [show, setShow] = useState(false);

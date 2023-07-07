@@ -5,7 +5,7 @@ import tantrum from "../Emotions/4tantrum.jpg";
 import Pigritia from "../Emotions/5Pigritia.jpg";
 import malice from "../Emotions/6malice.jpg";
 import selfProtection from "../Emotions/7selfProtection.jpg";
-const EmotionDB = [
+const EmotionKind = [
   {
     id: 1,
     title: "분노",
@@ -50,4 +50,4 @@ const EmotionDB = [
   },
 ];
 
-export default EmotionDB;
+export default EmotionKind;

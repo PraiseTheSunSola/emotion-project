@@ -1,7 +1,10 @@
 import styled from "styled-components";
+import EmotionDB from "./EmotionDB";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+
+// ------------------------------------------- 버튼
 
 const NavButtonCircle = styled(motion.div)`
   position: relative;
@@ -49,11 +52,38 @@ const StyledLink = styled(Link)`
   color: black;
   text-decoration: none;
 `;
+
 const inout = {
   start: { opacity: 0, scale: 0 },
   end: { opacity: 1, scale: 1, rotateZ: 0, transition: { type: "spring" } },
   exit: { opacity: 0, scale: 0, rotateZ: 0 },
 };
+
+// ------------------------------------------- 버튼
+
+const Page = styled.div`
+  width: 1000px;
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+`;
+
+const DbBox = styled.div`
+  text-align: center;
+  width: 300px;
+  margin-bottom: 20px;
+  border: 5px solid #00ff00;
+  color: violet;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const Img = styled.img`
+  width: 100%;
+  height: 100px;
+`;
+
 export function Introduction() {
   const [show, setShow] = useState(false);
   function clickButton() {
@@ -62,6 +92,15 @@ export function Introduction() {
   // const navigate = useNavigate();
   return (
     <>
+      <Page>
+        {EmotionDB.map((Emotion, i) => (
+          <DbBox key={Emotion.id}>
+            <Img src={Emotion.image} alt={Emotion.description} />
+            <h3>이름: {Emotion.title}</h3>
+          </DbBox>
+        ))}
+      </Page>
+
       <NavButtonCircle>
         <NavButton onClick={clickButton}>클릭</NavButton>
         <AnimatePresence>
@@ -98,8 +137,6 @@ export function Introduction() {
           ) : null}
         </AnimatePresence>
       </NavButtonCircle>
-
-      <h1>이곳은 감정 소개입니다</h1>
     </>
   );
 }
