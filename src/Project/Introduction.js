@@ -83,7 +83,7 @@ export function Introduction() {
                 animate="end"
                 exit="exit"
               >
-                메인
+                <StyledLink to="/Homepage">메인</StyledLink>
               </MainButton>
 
               <NextButton

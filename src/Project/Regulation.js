@@ -267,9 +267,8 @@ export function Regulation() {
                   initial="start"
                   animate="end"
                   exit="exit"
-                  // onClick={() => navigate(-1)}
                 >
-                  이전
+                  <StyledLink to="/Regulation">이전</StyledLink>
                 </BackButton>
 
                 <MainButton
@@ -278,7 +277,7 @@ export function Regulation() {
                   animate="end"
                   exit="exit"
                 >
-                  메인
+                  <StyledLink to="/Homepage">메인</StyledLink>
                 </MainButton>
 
                 <NextButton

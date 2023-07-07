@@ -1,4 +1,4 @@
-// import { Homepage } from "./Homepage";
+import { Homepage } from "./Homepage";
 import { Navbar } from "./Navbar";
 import { Regulation } from "./Regulation";
 import { Introduction } from "./Introduction";
@@ -11,6 +11,7 @@ export function Emotion() {
     <>
       <BrowserRouter>
         <Routes>
+          <Route path="/Homepage" element={<Homepage />} />
           <Route path="/" element={<Navbar />}>
             <Route path="/Regulation" element={<Regulation />} />
             <Route path="/Introduction" element={<Introduction />} />
