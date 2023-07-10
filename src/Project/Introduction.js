@@ -22,7 +22,8 @@ const DbBox = styled(motion.div)`
   text-align: center;
 
   &:hover {
-    cursor: pointer;
+    cursor: zoom-in;
+    border: 5px solid red;
   }
 `;
 const Name = styled(motion.h3)`
@@ -132,14 +133,15 @@ export function Introduction() {
     const updatedDB = emotionDB.filter((emotion) => emotion.id !== id);
     setEmotionDB(updatedDB);
     setSelectedImage(null); // 선택 상태 초기화
-    console.log("Delete button clicked");
-    console.log("Delete item with ID:", id);
   }
 
-  const handleImageClick = (i) => {
+  const ImageClick = (i) => {
     setSelectedImage(i);
   };
-  useEffect(() => controls.start(), [controls]);
+
+  useEffect(() => {
+    controls.start();
+  }, [controls]);
 
   const [show, setShow] = useState(false);
   function clickButton() {
@@ -158,7 +160,7 @@ export function Introduction() {
               transition: { duration: 10, repeat: Infinity },
             }}
           >
-            <DbBox onClick={() => handleImageClick(i)}>
+            <DbBox onClick={() => ImageClick(i)}>
               <Img src={Emotion.image} alt={Emotion.description} />
               <Name>{Emotion.title}</Name>
             </DbBox>

@@ -98,7 +98,7 @@ export function Homepage() {
                 animate="end"
                 exit="exit"
               >
-                <StyledLink to="/Processing">시작 하기</StyledLink>
+                <StyledLink to="/Processing">정리 하기</StyledLink>
               </MoveProcessing>
 
               <MoveWarehouse
