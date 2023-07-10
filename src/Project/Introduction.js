@@ -10,23 +10,61 @@ const Page = styled.div`
   grid-template-columns: repeat(5, 1fr);
 `;
 
-const DbBox = styled.div`
+const BigBox = styled(motion.div)`
+  width: 100%;
+  height: 80%;
+`;
+
+const DbBox = styled(motion.div)`
   width: 300px;
   height: 300px;
   margin-bottom: 20px;
   text-align: center;
+
   &:hover {
     cursor: pointer;
   }
 `;
-
-const Name = styled.h3`
+const Name = styled(motion.h3)`
   font-size: 20px;
 `;
 
-const Img = styled.img`
+const Text = styled(motion.h3)`
+  font-size: 20px;
+`;
+
+const Img = styled(motion.img)`
   width: 100%;
   height: 80%;
+`;
+
+const Modal = styled(motion.div)`
+  position: fixed;
+  width: 500px;
+  height: 600px;
+  top: 40%;
+  left: 50%;
+  background-color: white;
+  border: 5px solid black;
+  transform: translate(-50%, -50%);
+  Img {
+    width: 100%;
+    height: 80%;
+  }
+`;
+
+const DeleteBtn = styled.button`
+  position: absolute;
+  top: 102%;
+  right: -1%;
+  width: 100px;
+  height: 40px;
+  background-color: black;
+  color: white;
+  font-size: 16px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 // ------------------------------------------- 버튼
@@ -45,8 +83,10 @@ const NavButton = styled(motion.button)`
   width: 50px;
   height: 50px;
   transform-origin: center center;
-  /* top: 30%;
-  left: 40%; */
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Buttons = styled(motion.div)`
@@ -84,11 +124,22 @@ const inout = {
 // ------------------------------------------- 버튼
 
 export function Introduction() {
+  const [selectedImage, setSelectedImage] = useState(null); // 이미지 클릭
+  const [emotionDB, setEmotionDB] = useState(EmotionDB);
   const controls = useAnimation();
-  const [hoveredIndex, setHoveredIndex] = useState(null);
-  useEffect(() => {
-    controls.start({ x: "100%" }); // 초기 위치 설정
-  }, [controls]);
+
+  function DeleteBtnClick(id) {
+    const updatedDB = emotionDB.filter((emotion) => emotion.id !== id);
+    setEmotionDB(updatedDB);
+    setSelectedImage(null); // 선택 상태 초기화
+    console.log("Delete button clicked");
+    console.log("Delete item with ID:", id);
+  }
+
+  const handleImageClick = (i) => {
+    setSelectedImage(i);
+  };
+  useEffect(() => controls.start(), [controls]);
 
   const [show, setShow] = useState(false);
   function clickButton() {
@@ -99,30 +150,37 @@ export function Introduction() {
     <>
       <Page>
         {EmotionDB.map((Emotion, i) => (
-          <motion.div
-            style={{ width: "100%", height: "80%" }}
+          <BigBox
             key={Emotion.id}
-            initial={{ x: i % 2 === 0 ? "100%" : "-100%" }}
-            animate={
-              hoveredIndex === i
-                ? { x: 0 }
-                : { x: i % 2 === 0 ? "-100%" : "100%" }
-            }
-            transition={{ duration: 10, repeat: Infinity }} // 애니메이션의 지속 시간
-            onMouseEnter={() => setHoveredIndex(i)}
-            onMouseLeave={() => setHoveredIndex(null)}
+            initial={{ x: i < 5 ? "-100%" : "100%" }}
+            animate={{
+              x: i < 5 ? ["-100%", "100%", "-100%"] : ["100%", "-100%", "100%"],
+              transition: { duration: 10, repeat: Infinity },
+            }}
           >
-            <DbBox>
-              <motion.img
-                src={Emotion.image}
-                alt={Emotion.description}
-                style={{ width: "100%", height: "80%" }}
-              />
+            <DbBox onClick={() => handleImageClick(i)}>
+              <Img src={Emotion.image} alt={Emotion.description} />
               <Name>{Emotion.title}</Name>
             </DbBox>
-          </motion.div>
+          </BigBox>
         ))}
       </Page>
+
+      {selectedImage !== null && ( // 선택된 이미지가 있는 경우에만 모달창 표시
+        <Modal>
+          <Img
+            src={EmotionDB[selectedImage].image}
+            alt={EmotionDB[selectedImage].description}
+          />
+          <Name>{EmotionDB[selectedImage].title}</Name>
+          <Text>{EmotionDB[selectedImage].text}</Text>
+          <DeleteBtn
+            onClick={() => DeleteBtnClick(EmotionDB[selectedImage].id)}
+          >
+            뒤로
+          </DeleteBtn>
+        </Modal>
+      )}
 
       <NavButtonCircle>
         <NavButton onClick={clickButton}>클릭</NavButton>

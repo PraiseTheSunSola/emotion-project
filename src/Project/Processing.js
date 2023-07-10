@@ -75,7 +75,6 @@ export function Processing() {
                 initial="start"
                 animate="end"
                 exit="exit"
-                // onClick={() => navigate(-1)}
               >
                 <StyledLink to="/Introduction">이전</StyledLink>
               </BackButton>
