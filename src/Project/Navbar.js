@@ -5,6 +5,8 @@ const Home = styled.div``;
 
 const Page = styled(NavLink)`
   margin: 30px;
+  color: black;
+  text-decoration: none;
 `;
 export function Navbar() {
   return (

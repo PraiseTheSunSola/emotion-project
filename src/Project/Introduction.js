@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import EmotionDB from "./EmotionDB";
-import { AnimatePresence, motion, useAnimation } from "framer-motion";
-import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Page = styled.div`
@@ -127,7 +127,6 @@ const inout = {
 export function Introduction() {
   const [selectedImage, setSelectedImage] = useState(null); // 이미지 클릭
   const [emotionDB, setEmotionDB] = useState(EmotionDB);
-  const controls = useAnimation();
 
   function DeleteBtnClick(id) {
     const updatedDB = emotionDB.filter((emotion) => emotion.id !== id);
@@ -138,10 +137,6 @@ export function Introduction() {
   const ImageClick = (i) => {
     setSelectedImage(i);
   };
-
-  useEffect(() => {
-    controls.start();
-  }, [controls]);
 
   const [show, setShow] = useState(false);
   function clickButton() {

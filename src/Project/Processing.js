@@ -2,18 +2,21 @@ import styled from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { Anger, Sadness, apprehension, Hurt, shame } from "./MenuListDB";
 
 const Page = styled.div`
-  display: flex;
   width: 100vw;
   height: 100vh;
+`;
+
+const MenuAndInput = styled.div`
+  width: 50%;
+  height: 50%;
+  display: flex;
   justify-content: space-evenly;
   align-items: center;
 `;
 
-const Test = styled.div`
-  height: 371px;
-`;
 //--------------------------------Menu1
 const Menu1 = styled(motion.nav)`
   display: inline-block;
@@ -31,7 +34,11 @@ const MenuUl1 = styled(motion.ul)`
   height: 300px;
   background-color: wheat;
 `;
-const MenuList1 = styled(motion.li)``;
+const MenuList1 = styled(motion.li)`
+  :hover {
+    cursor: pointer;
+  }
+`;
 
 //--------------------------------Menu1
 
@@ -57,18 +64,43 @@ const MenuList2 = styled(motion.li)``;
 
 //--------------------------------Menu2
 
-const Input1 = styled.input`
+//--------------------------------Input
+
+const TitleInputBox = styled.div`
+  height: 371px;
+`;
+const TitleInput = styled.input`
   width: 200px;
   height: 33px;
   border: 2px solid black;
   display: inline-block;
 `;
-const Input2 = styled.input`
+
+const EnterManuallyInputBox = styled.div`
+  height: 371px;
+`;
+const EnterManuallyInput = styled.input`
   width: 200px;
   height: 33px;
   border: 2px solid black;
   display: inline-block;
 `;
+
+const MainContentInputBox = styled.div`
+  height: 0%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+`;
+
+const MainContentInput = styled.textarea`
+  width: 800px;
+  height: 500px;
+  border: 2px solid black;
+  display: inline-block;
+`;
+
+//--------------------------------Input
 
 // ------------------------------------------- 버튼
 
@@ -140,137 +172,212 @@ export function Processing() {
   const [show, setShow] = useState(false);
   const [isOpen1, setIsOpen1] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
-  const [input1Value, setInput1Value] = useState("");
-  const [input2Value, setInput2Value] = useState("");
+  const [enterManuallyInputValue, setEnterManuallyInputValue] = useState("");
+  const [titleinputValue, setTitleInputValue] = useState("");
+  const [mainContentInputValue, setMainContentInputValue] = useState("");
+  const [firstList, setFirstList] = useState(0);
+  const [selectedMenu1Text, setSelectedMenu1Text] = useState("");
+  const [selectedMenu2Text, setSelectedMenu2Text] = useState("");
 
-  const Input1Change = (event) => {
-    setInput1Value(event.target.value);
+  const EnterManuallyInputChange = (event) => {
+    setEnterManuallyInputValue(event.target.value);
   };
-  const Input2Change = (event) => {
-    setInput2Value(event.target.value);
+  const TitleInputChange = (event) => {
+    setTitleInputValue(event.target.value);
+  };
+  const MainContentInputChange = (event) => {
+    setMainContentInputValue(event.target.value);
   };
 
   function clickButton() {
     setShow((appear) => !appear);
   }
+
+  const TwoDimensionalArray = {
+    분노: Anger,
+    슬픔: Sadness,
+    불안: apprehension,
+    아픔: Hurt,
+    창피: shame,
+  };
+
+  function MenuListClick(menu) {
+    setFirstList(menu);
+    setSelectedMenu1Text(menu);
+  }
+
   return (
     <>
       <Page>
-        <Menu1
-          initial={false}
-          animate={isOpen1 ? "open" : "closed"}
-          className="menu"
-        >
-          <MenuButton1
-            whileTap={{ scale: 0.97 }}
-            onClick={() => setIsOpen1(!isOpen1)}
+        <MenuAndInput>
+          <Menu1
+            initial={false}
+            animate={isOpen1 ? "open" : "closed"}
+            className="menu"
           >
-            Menu
-            <MenuBox1
-              variants={{
-                open: { rotate: 180 },
-                closed: { rotate: 0 },
-              }}
-              transition={{ duration: 0.2 }}
-              style={{ originY: 0.55 }}
+            <MenuButton1
+              whileTap={{ scale: 0.97 }}
+              onClick={() => setIsOpen1(!isOpen1)}
             >
-              <svg width="15" height="15" viewBox="0 0 20 20">
-                <path d="M0 7 L 20 7 L 10 16" />
-              </svg>
-            </MenuBox1>
-          </MenuButton1>
+              {selectedMenu1Text || "Menu"}
+              <MenuBox1
+                variants={{
+                  open: { rotate: 180 },
+                  closed: { rotate: 0 },
+                }}
+                transition={{ duration: 0.2 }}
+                style={{ originY: 0.55 }}
+              >
+                <svg width="15" height="15" viewBox="0 0 20 20">
+                  <path d="M0 7 L 20 7 L 10 16" />
+                </svg>
+              </MenuBox1>
+            </MenuButton1>
 
-          <MenuUl1
-            variants={{
-              open: {
-                clipPath: "inset(0% 0% 0% 0% round 10px)",
-                transition: {
-                  type: "spring",
-                  bounce: 0,
-                  duration: 0.7,
-                  delayChildren: 0.3,
-                  staggerChildren: 0.05,
-                },
-              },
-              closed: {
-                clipPath: "inset(10% 50% 90% 50% round 10px)",
-                transition: {
-                  type: "spring",
-                  bounce: 0,
-                  duration: 0.3,
-                },
-              },
-            }}
-            style={{ pointerEvents: isOpen1 ? "auto" : "none" }}
-          >
-            <MenuList1 variants={itemVariants}>Item 1 </MenuList1>
-            <MenuList1 variants={itemVariants}>Item 2 </MenuList1>
-            <MenuList1 variants={itemVariants}>Item 3 </MenuList1>
-            <MenuList1 variants={itemVariants}>Item 4 </MenuList1>
-            <MenuList1 variants={itemVariants}>Item 5 </MenuList1>
-          </MenuUl1>
-        </Menu1>
-
-        <Menu2
-          initial={false}
-          animate={isOpen2 ? "open" : "closed"}
-          className="menu"
-        >
-          <MenuButton2
-            whileTap={{ scale: 0.97 }}
-            onClick={() => setIsOpen2(!isOpen2)}
-          >
-            Menu
-            <MenuBox2
+            <MenuUl1
               variants={{
-                open: { rotate: 180 },
-                closed: { rotate: 0 },
+                open: {
+                  clipPath: "inset(0% 0% 0% 0% round 10px)",
+                  transition: {
+                    type: "spring",
+                    bounce: 0,
+                    duration: 0.7,
+                    delayChildren: 0.3,
+                    staggerChildren: 0.05,
+                  },
+                },
+                closed: {
+                  clipPath: "inset(10% 50% 90% 50% round 10px)",
+                  transition: {
+                    type: "spring",
+                    bounce: 0,
+                    duration: 0.3,
+                  },
+                },
               }}
-              transition={{ duration: 0.2 }}
-              style={{ originY: 0.55 }}
+              style={{ pointerEvents: isOpen1 ? "auto" : "none" }}
             >
-              <svg width="15" height="15" viewBox="0 0 20 20">
-                <path d="M0 7 L 20 7 L 10 16" />
-              </svg>
-            </MenuBox2>
-          </MenuButton2>
+              <MenuList1
+                variants={itemVariants}
+                onClick={() => MenuListClick("분노")}
+              >
+                {" "}
+                분노{" "}
+              </MenuList1>
+              <MenuList1
+                variants={itemVariants}
+                onClick={() => MenuListClick("슬픔")}
+              >
+                {" "}
+                슬픔{" "}
+              </MenuList1>
+              <MenuList1
+                variants={itemVariants}
+                onClick={() => MenuListClick("불안")}
+              >
+                {" "}
+                불안{" "}
+              </MenuList1>
+              <MenuList1
+                variants={itemVariants}
+                onClick={() => MenuListClick("아픔")}
+              >
+                {" "}
+                아픔{" "}
+              </MenuList1>
+              <MenuList1
+                variants={itemVariants}
+                onClick={() => MenuListClick("창피")}
+              >
+                {" "}
+                창피{" "}
+              </MenuList1>
+            </MenuUl1>
+          </Menu1>
 
-          <MenuUl2
-            variants={{
-              open: {
-                clipPath: "inset(0% 0% 0% 0% round 10px)",
-                transition: {
-                  type: "spring",
-                  bounce: 0,
-                  duration: 0.7,
-                  delayChildren: 0.3,
-                  staggerChildren: 0.05,
-                },
-              },
-              closed: {
-                clipPath: "inset(10% 50% 90% 50% round 10px)",
-                transition: {
-                  type: "spring",
-                  bounce: 0,
-                  duration: 0.3,
-                },
-              },
-            }}
-            style={{ pointerEvents: isOpen2 ? "auto" : "none" }}
+          <Menu2
+            initial={false}
+            animate={isOpen2 ? "open" : "closed"}
+            className="menu"
           >
-            <MenuList2 variants={itemVariants}>Item 1 </MenuList2>
-            <MenuList2 variants={itemVariants}>Item 2 </MenuList2>
-            <MenuList2 variants={itemVariants}>Item 3 </MenuList2>
-            <MenuList2 variants={itemVariants}>Item 4 </MenuList2>
-            <MenuList2 variants={itemVariants}>Item 5 </MenuList2>
-          </MenuUl2>
-        </Menu2>
-        <Test>
-          <Input1 type="text" value={input1Value} onChange={Input1Change} />
-        </Test>
-        <Test>
-          <Input2 type="text" value={input2Value} onChange={Input2Change} />
-        </Test>
+            <MenuButton2
+              whileTap={{ scale: 0.97 }}
+              onClick={() => setIsOpen2(!isOpen2)}
+            >
+              {selectedMenu2Text || "Menu"}
+              <MenuBox2
+                variants={{
+                  open: { rotate: 180 },
+                  closed: { rotate: 0 },
+                }}
+                transition={{ duration: 0.2 }}
+                style={{ originY: 0.55 }}
+              >
+                <svg width="15" height="15" viewBox="0 0 20 20">
+                  <path d="M0 7 L 20 7 L 10 16" />
+                </svg>
+              </MenuBox2>
+            </MenuButton2>
+
+            <MenuUl2
+              variants={{
+                open: {
+                  clipPath: "inset(0% 0% 0% 0% round 10px)",
+                  transition: {
+                    type: "spring",
+                    bounce: 0,
+                    duration: 0.7,
+                    delayChildren: 0.3,
+                    staggerChildren: 0.05,
+                  },
+                },
+                closed: {
+                  clipPath: "inset(10% 50% 90% 50% round 10px)",
+                  transition: {
+                    type: "spring",
+                    bounce: 0,
+                    duration: 0.3,
+                  },
+                },
+              }}
+              style={{ pointerEvents: isOpen2 ? "auto" : "none" }}
+            >
+              {firstList &&
+                TwoDimensionalArray[firstList].map((menu) => (
+                  <MenuList2 key={menu.id} variants={itemVariants}>
+                    {menu.title}
+                  </MenuList2>
+                ))}
+            </MenuUl2>
+          </Menu2>
+
+          <EnterManuallyInputBox>
+            <EnterManuallyInput
+              type="text"
+              placeholder="직접입력"
+              value={enterManuallyInputValue}
+              onChange={EnterManuallyInputChange}
+            />
+          </EnterManuallyInputBox>
+
+          <TitleInputBox>
+            <TitleInput
+              type="text"
+              placeholder="제목 입력"
+              value={titleinputValue}
+              onChange={TitleInputChange}
+            />
+          </TitleInputBox>
+        </MenuAndInput>
+
+        <MainContentInputBox>
+          <MainContentInput
+            type="text"
+            placeholder="당신의 감정을 차근 차근 정리해보세요."
+            value={mainContentInputValue}
+            onChange={MainContentInputChange}
+          />
+        </MainContentInputBox>
       </Page>
       {/* ---------------------------------------------------------------------------- */}
       <NavButtonCircle>
