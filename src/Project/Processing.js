@@ -10,6 +10,10 @@ const Page = styled.div`
   justify-content: space-evenly;
   align-items: center;
 `;
+
+const Test = styled.div`
+  height: 371px;
+`;
 //--------------------------------Menu1
 const Menu1 = styled(motion.nav)`
   display: inline-block;
@@ -261,9 +265,12 @@ export function Processing() {
             <MenuList2 variants={itemVariants}>Item 5 </MenuList2>
           </MenuUl2>
         </Menu2>
-
-        <Input1 type="text" value={input1Value} onChange={Input1Change} />
-        <Input2 type="text" value={input2Value} onChange={Input2Change} />
+        <Test>
+          <Input1 type="text" value={input1Value} onChange={Input1Change} />
+        </Test>
+        <Test>
+          <Input2 type="text" value={input2Value} onChange={Input2Change} />
+        </Test>
       </Page>
       {/* ---------------------------------------------------------------------------- */}
       <NavButtonCircle>

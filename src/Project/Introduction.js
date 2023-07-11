@@ -157,7 +157,7 @@ export function Introduction() {
             initial={{ x: i < 5 ? "-100%" : "100%" }}
             animate={{
               x: i < 5 ? ["-100%", "100%", "-100%"] : ["100%", "-100%", "100%"],
-              transition: { duration: 10, repeat: Infinity },
+              transition: { duration: 50, repeat: Infinity },
             }}
           >
             <DbBox onClick={() => ImageClick(i)}>

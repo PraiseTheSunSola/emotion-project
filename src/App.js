@@ -13,6 +13,7 @@ body {
   
 * {
   font-family: "NEXON Lv1 Gothic OTF";
+  box-sizing: border-box;
 }
 }
 `;
