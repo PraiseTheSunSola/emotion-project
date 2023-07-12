@@ -3,8 +3,27 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-// ------------------------------------------- 버튼
+const Page = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
+const Testbutton = styled(motion.button)`
+  width: 700px;
+  height: 300px;
+  border: 5px solid red;
+  background-color: gray;
+`;
+
+const fadeInAnimation = {
+  visible: { opacity: 1 },
+  hidden: { opacity: 0 },
+};
+
+// ------------------------------------------- 버튼
 const NavButtonCircle = styled(motion.div)`
   position: relative;
   position: fixed;
@@ -64,11 +83,33 @@ const inout = {
 
 export function Homepage() {
   const [show, setShow] = useState(false);
+  const [isAnimated, setIsAnimated] = useState(false);
+
+  const handleClick = () => {
+    setIsAnimated(!isAnimated);
+  };
+
   function clickButton() {
     setShow((appear) => !appear);
   }
   return (
     <>
+      <Page>
+        <Testbutton
+          initial="visible"
+          animate={isAnimated ? "hidden" : "visible"}
+          variants={fadeInAnimation}
+          transition={{ duration: 1 }}
+          onClick={handleClick}
+        >
+          <h1>
+            현재 메인 홈페이지는 공사중이므로 양해바랍니다.
+            <br />
+            <br />
+            (클릭시 사라집니다.)
+          </h1>
+        </Testbutton>
+      </Page>
       <NavButtonCircle>
         <NavButton onClick={clickButton}>클릭</NavButton>
         <AnimatePresence>
@@ -113,8 +154,6 @@ export function Homepage() {
           ) : null}
         </AnimatePresence>
       </NavButtonCircle>
-
-      <h1>현재 메인 홈페이지는 공사중입니다.</h1>
     </>
   );
 }
