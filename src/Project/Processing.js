@@ -5,57 +5,89 @@ import { Link } from "react-router-dom";
 const Page = styled.div`
   width: 100vw;
   height: 100vh;
-  background: #8e9eab; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #eef2f3,
-    #8e9eab
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #eef2f3, #8e9eab);
+  background-color: black;
 `;
 
-const EmotionBox = styled.div`
+const EmotionBox = styled(motion.div)`
+  display: block;
   width: 100%;
   height: 100%;
   display: grid;
   grid-template-columns: repeat(8, 1fr);
 `;
-const Anger = styled(motion.div)`
+
+const Box = styled(motion.div)`
+  &:hover {
+    z-index: 2;
+  }
+`;
+
+const Anger = styled(Box)`
+  transform-origin: left;
   background-color: aliceblue;
 `;
 
-const Sadness = styled(motion.div)`
+const Sadness = styled(Box)`
+  transform-origin: ${(props) =>
+    props.hovered ? "right" : props.defaultOrigin};
   background-color: antiquewhite;
 `;
 
-const Anxiety = styled(motion.div)`
+const Anxiety = styled(Box)`
+  transform-origin: right;
   background-color: aqua;
 `;
 
-const Hurt = styled(motion.div)`
+const Hurt = styled(Box)`
+  transform-origin: top;
   background-color: aquamarine;
 `;
 
-const Shame = styled(motion.div)`
+const Shame = styled(Box)`
+  transform-origin: bottom;
   background-color: azure;
 `;
 
-const Happiness = styled(motion.div)`
+const Happiness = styled(Box)`
+  transform-origin: right;
   background-color: beige;
 `;
 
-const Love = styled(motion.div)`
+const Love = styled(Box)`
+  transform-origin: left;
   background-color: bisque;
 `;
 
-const Wish = styled(motion.div)`
-  background-color: black;
+const Wish = styled(Box)`
+  transform-origin: right;
+  background-color: blueviolet;
 `;
+
+const BoxAxisXHover = {
+  start: {
+    scaleX: 1.5,
+
+    transition: { duration: 1, type: "tween" },
+  },
+};
+
+const BoxAxisYHover = {
+  start: {
+    scaleY: 0,
+    transition: { duration: 2, type: "tween" },
+  },
+
+  end: {
+    scaleY: 1,
+    transition: { duration: 2, type: "tween" },
+  },
+};
 
 // ------------------------------------------- 버튼
 const NavButtonCircle = styled(motion.div)`
   position: relative;
   position: fixed;
+  z-index: 3;
   top: 50%;
   right: 10px;
   width: 50px;
@@ -108,6 +140,8 @@ const inout = {
 
 export function Processing() {
   const [show, setShow] = useState(false);
+  const [hoveredSadness, setHoveredSadness] = useState(false);
+  const [showAnxiety, setShowAnxiety] = useState(false);
 
   function clickButton() {
     setShow((appear) => !appear);
@@ -117,21 +151,52 @@ export function Processing() {
     <>
       <Page>
         <EmotionBox>
-          <Anger />
+          <Anger
+            variants={BoxAxisXHover}
+            whileHover="start"
+            onMouseEnter={() => {
+              setHoveredSadness(false);
+              setShowAnxiety(false);
+            }}
+          />
 
-          <Sadness />
+          <Sadness
+            variants={BoxAxisXHover}
+            whileHover="start"
+            onMouseEnter={() => setHoveredSadness(!showAnxiety)}
+            onMouseLeave={() => setHoveredSadness(false)}
+            hovered={hoveredSadness}
+            defaultOrigin={showAnxiety ? "left" : "right"}
+          />
 
-          <Anxiety />
+          <Anxiety
+            variants={BoxAxisXHover}
+            whileHover="start"
+            onMouseEnter={() => {
+              setHoveredSadness(false);
+              setShowAnxiety(true);
+            }}
+          />
 
-          <Hurt />
+          <Hurt
+            variants={BoxAxisYHover}
+            whileHover="start"
+            initial="start"
+            animate="end"
+          />
 
-          <Shame />
+          <Shame
+            variants={BoxAxisYHover}
+            whileHover="start"
+            initial="start"
+            animate="end"
+          />
 
-          <Happiness />
+          <Happiness variants={BoxAxisXHover} whileHover="start" />
 
-          <Love />
+          <Love variants={BoxAxisXHover} whileHover="start" />
 
-          <Wish />
+          <Wish variants={BoxAxisXHover} whileHover="start" />
         </EmotionBox>
       </Page>
       {/* ---------------------------------------------------------------------------- */}

@@ -1,11 +1,13 @@
 import { NavLink, Outlet } from "react-router-dom";
 import styled from "styled-components";
 
-const Home = styled.div``;
+const Home = styled.div`
+  background-color: black;
+`;
 
 const Page = styled(NavLink)`
   margin: 30px;
-  color: black;
+  color: whitesmoke;
   text-decoration: none;
 `;
 export function Navbar() {
