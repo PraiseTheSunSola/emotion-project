@@ -14,6 +14,44 @@ const Page = styled.div`
   background: linear-gradient(to right, #eef2f3, #8e9eab);
 `;
 
+const EmotionBox = styled.div`
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+`;
+const Anger = styled(motion.div)`
+  background-color: aliceblue;
+`;
+
+const Sadness = styled(motion.div)`
+  background-color: antiquewhite;
+`;
+
+const Anxiety = styled(motion.div)`
+  background-color: aqua;
+`;
+
+const Hurt = styled(motion.div)`
+  background-color: aquamarine;
+`;
+
+const Shame = styled(motion.div)`
+  background-color: azure;
+`;
+
+const Happiness = styled(motion.div)`
+  background-color: beige;
+`;
+
+const Love = styled(motion.div)`
+  background-color: bisque;
+`;
+
+const Wish = styled(motion.div)`
+  background-color: black;
+`;
+
 // ------------------------------------------- 버튼
 const NavButtonCircle = styled(motion.div)`
   position: relative;
@@ -77,7 +115,25 @@ export function Processing() {
 
   return (
     <>
-      <Page></Page>
+      <Page>
+        <EmotionBox>
+          <Anger />
+
+          <Sadness />
+
+          <Anxiety />
+
+          <Hurt />
+
+          <Shame />
+
+          <Happiness />
+
+          <Love />
+
+          <Wish />
+        </EmotionBox>
+      </Page>
       {/* ---------------------------------------------------------------------------- */}
       <NavButtonCircle>
         <NavButton onClick={clickButton}>클릭</NavButton>

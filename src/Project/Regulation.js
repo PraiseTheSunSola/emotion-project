@@ -250,11 +250,11 @@ export function Regulation() {
     ["black", "black", "black", "black"]
   );
 
-  // const color7 = useTransform(
-  //   scrollYProgress,
-  //   [0.89, 0.9, 0.98, 1.5],
-  //   [0, 0.5, 1, 0]
-  // );
+  const color7 = useTransform(
+    scrollYProgress,
+    [0.89, 0.9, 0.98, 1.5],
+    ["black", "black", "black", "black"]
+  );
 
   return (
     <>
@@ -380,7 +380,7 @@ export function Regulation() {
               opacity: scrollOpacity7,
             }}
           />
-          <H7 style={{ opacity: scrollOpacity7 }}>
+          <H7 style={{ color: color7, opacity: scrollOpacity7 }}>
             아침과 함께 감정만 피어난 내가 될 수 있으니.
           </H7>
         </ImageBox>
