@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 const Page = styled.div`
   width: 100vw;
+
   display: grid;
   grid-template-columns: repeat(5, 1fr);
 `;

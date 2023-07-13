@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   sodipodi:docname="그림그리기.svg"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="2.2097881"
+     inkscape:cx="279.8911"
+     inkscape:cy="397.77571"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient772">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop768" />
+      <stop
+         style="stop-color:#000000;stop-opacity:0;"
+         offset="1"
+         id="stop770" />
+    </linearGradient>
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient772"
+       id="radialGradient774"
+       cx="33.883728"
+       cy="98.789966"
+       fx="33.883728"
+       fy="98.789966"
+       r="13.603045"
+       gradientTransform="matrix(1,0,0,0.0590347,0,92.95793)"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <g
+     inkscape:label="레이어 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       aria-label="ㄴ감정정리 "
+       id="text63"
+       style="font-size:3.175px;-inkscape-font-specification:'sans-serif, Normal';fill-opacity:0;stroke:url(#radialGradient774);stroke-width:0.264583">
+      <path
+         d="m 22.2263,99.529456 h -1.945617 v -1.486731 h 0.230993 v 1.277441 H 22.2263 Z"
+         id="path1984" />
+      <path
+         d="m 25.356342,98.200855 v 0.648022 h -0.230994 v -1.657263 h 0.230994 v 0.803052 h 0.451135 v 0.206189 z m -0.796851,-0.851111 q -0.07906,1.047998 -1.351855,1.578198 l -0.165882,-0.184485 q 0.517798,-0.16123 0.851111,-0.494543 0.334864,-0.334864 0.393775,-0.691431 h -1.0573 v -0.207739 z m -1.015442,2.762626 v -1.094511 h 1.815393 v 1.094511 z m 1.5844,-0.888322 h -1.353406 v 0.682129 h 1.353406 z"
+         style="fill:#ff0000;stroke:#f96e85"
+         id="path1986" />
+      <path
+         d="m 28.446076,98.91864 v -0.84801 h -0.697632 v -0.206189 h 0.697632 v -0.672827 h 0.232544 v 1.727026 z m -0.641822,-0.170532 q -0.203088,-0.110071 -0.407727,-0.308508 -0.204638,-0.198438 -0.286804,-0.372071 -0.08837,0.196888 -0.294555,0.418579 -0.206189,0.220142 -0.417029,0.337964 l -0.164331,-0.15968 q 0.32091,-0.153479 0.537951,-0.444934 0.217041,-0.291455 0.217041,-0.612366 v -0.07596 h -0.657324 v -0.206189 h 1.539441 v 0.206189 h -0.657324 v 0.07596 q 0,0.299207 0.224792,0.573609 0.224793,0.274402 0.522449,0.398425 z m -0.04341,1.390612 q -0.468188,0 -0.723987,-0.16278 -0.254248,-0.161231 -0.254248,-0.418579 0,-0.257349 0.254248,-0.417029 0.254248,-0.16123 0.723987,-0.16123 0.469739,0 0.723987,0.16123 0.254248,0.15968 0.254248,0.417029 0,0.257348 -0.255798,0.418579 -0.254248,0.16278 -0.722437,0.16278 z m 0,-0.962731 q -0.355017,0 -0.542602,0.10852 -0.187586,0.10697 -0.187586,0.272852 0,0.167431 0.187586,0.274402 0.189135,0.10697 0.542602,0.10697 0.351917,0 0.541052,-0.10542 0.189136,-0.10697 0.189136,-0.275952 0,-0.167432 -0.187585,-0.274402 -0.187586,-0.10697 -0.542603,-0.10697 z"
+         style="fill:#ff0000;stroke:#f96e85"
+         id="path1988" />
+      <path
+         d="m 31.621075,98.91864 v -0.84801 h -0.697631 v -0.206189 h 0.697631 v -0.672827 h 0.232544 v 1.727026 z m -0.641821,-0.170532 q -0.203088,-0.110071 -0.407727,-0.308508 -0.204639,-0.198438 -0.286804,-0.372071 -0.08837,0.196888 -0.294556,0.418579 -0.206189,0.220142 -0.417029,0.337964 l -0.164331,-0.15968 q 0.320911,-0.153479 0.537952,-0.444934 0.217041,-0.291455 0.217041,-0.612366 v -0.07596 h -0.657324 v -0.206189 h 1.539441 v 0.206189 h -0.657324 v 0.07596 q 0,0.299207 0.224792,0.573609 0.224792,0.274402 0.522449,0.398425 z m -0.04341,1.390612 q -0.468189,0 -0.723987,-0.16278 -0.254248,-0.161231 -0.254248,-0.418579 0,-0.257349 0.254248,-0.417029 0.254248,-0.16123 0.723987,-0.16123 0.469739,0 0.723987,0.16123 0.254248,0.15968 0.254248,0.417029 0,0.257348 -0.255799,0.418579 -0.254248,0.16278 -0.722436,0.16278 z m 0,-0.962731 q -0.355017,0 -0.542603,0.10852 -0.187585,0.10697 -0.187585,0.272852 0,0.167431 0.187585,0.274402 0.189136,0.10697 0.542603,0.10697 0.351916,0 0.541052,-0.10542 0.189136,-0.10697 0.189136,-0.275952 0,-0.167432 -0.187586,-0.274402 -0.187585,-0.10697 -0.542602,-0.10697 z"
+         style="fill:#ff0000;stroke:#f96e85"
+         id="path1990" />
+      <path
+         d="m 34.76507,100.18213 v -2.990516 h 0.230993 v 2.990516 z m -1.998328,-0.644923 v -1.185974 h 1.137915 v -0.68988 h -1.137915 v -0.206189 h 1.368909 v 1.096057 h -1.136365 v 0.779797 q 1.127063,0 1.424719,-0.06356 l 0.02636,0.199988 q -0.37207,0.06976 -1.683618,0.06976 z"
+         style="fill:#ff0000;stroke:#f96e85"
+         id="path1992" />
+    </g>
+    <g
+       gcodetools="Gcodetools graffiti reference point"
+       id="g1934">
+      <path
+         style="stroke:none;fill:#00ff00;"
+         gcodetools="Gcodetools graffiti reference point arrow"
+         d="m 0 0 l 2.9375 -6.34375 l 0.8125 1.90625 l 6.84375 -6.84375 l 0 0 l 0.6875 0.6875 l -6.84375 6.84375 l 1.90625 0.8125 z z"
+         id="path1928" />
+      <text
+         x="10"
+         y="-10"
+         style="font-family:DejaVu Sans;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:DejaVu Sans;fill:#000000;fill-opacity:1;stroke:none;font-size:10.000000px;"
+         gcodetools="Gcodetools graffiti reference point text"
+         xml:space="preserve"
+         id="text1932"><tspan
+           x="10"
+           y="-10"
+           sodipodi:role="line"
+           id="tspan1930">X</tspan></text>
+    </g>
+  </g>
+</svg>

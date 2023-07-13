@@ -2,21 +2,16 @@ import styled from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-
 const Page = styled.div`
   width: 100vw;
   height: 100vh;
-  background: #000000; /* fallback for old browsers */
+  background: #8e9eab; /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to right,
-    #434343,
-    #000000
+    #eef2f3,
+    #8e9eab
   ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #434343,
-    #000000
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, #eef2f3, #8e9eab);
 `;
 
 // ------------------------------------------- 버튼
@@ -28,7 +23,6 @@ const NavButtonCircle = styled(motion.div)`
   width: 50px;
   height: 250px;
 `;
-
 const NavButton = styled(motion.button)`
   position: absolute;
   width: 50px;
