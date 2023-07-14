@@ -7,6 +7,7 @@ const Page = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: black;
+  
 `;
 
 const SvgBox = styled(motion.svg)`
@@ -24,6 +25,7 @@ const SvgBox = styled(motion.svg)`
   stroke-linejoin: round;
   stroke-linecap: round;
   fill: rgba(255, 205, 25, 0);
+  
 `;
 
 const Gieok = styled(motion.path)``;
@@ -57,35 +59,69 @@ const EmotionBox = styled(motion.div)`
   display: grid;
   grid-template-columns: repeat(8, 1fr);
 `;
-const Box = styled(motion.div)`
-  background-color: black;
+const Box1 = styled(motion.div)`
+  background-color: white;
   z-index: 2;
 `;
 
-const Hurt = styled(Box)`
+const TopBox = styled(Box1)`
   transform-origin: top;
-  /* background-color: aquamarine; */
+  /* background-color: white; */
 `;
 
-const Shame = styled(Box)`
+const BottomBox = styled(Box1)`
   transform-origin: bottom;
-  /* background-color: azure; */
+  /* background-color: black; */
 `;
 
-const BoxAxisYHover = {
-  start: {
-    opacity: 1,
-    scaleY: 0.5,
-    transition: { duration: 2, type: "tween" },
-  },
-
-  end: {
+const BoxAxisY = {
+  start1: {
     opacity: 0,
     scaleY: 1,
-    transition: { duration: 2, type: "tween" },
+   
+  },
+
+  end1: {
+    opacity: 1,
+    scaleY: 0,
+    transition: { duration: 3, type: "tween" },
   },
 };
 // -------------------------------------------위 아래 연출
+
+// -------------------------------------------좌 우 연출
+
+const Box2 = styled(motion.div)`
+  /* background-color: black; */
+  z-index: 2;
+`;
+
+const LeftBox = styled(Box2)`
+
+  transform-origin: top;
+  background-color: aquamarine;
+`;
+
+const RightBox = styled(Box2)`
+
+  transform-origin: bottom;
+  background-color: azure;
+`;
+
+const BoxAxisX = {
+  start2: {
+    opacity: 1,
+    scaleY: 0,
+   
+  },
+
+  end2: {
+    opacity: 0,
+    scaleY: 1,
+    transition: { duration: 3, type: "tween" },
+  },
+};
+// -------------------------------------------좌 우 연출
 
 // ------------------------------------------- 버튼
 const NavButtonCircle = styled(motion.div)`
@@ -158,27 +194,39 @@ export function Homepage() {
     <>
       <Page>
         <EmotionBox>
-          <Hurt variants={BoxAxisYHover} initial="start" animate="end" />
-          <Shame variants={BoxAxisYHover} initial="start" animate="end" />
-          <Hurt variants={BoxAxisYHover} initial="start" animate="end" />
-          <Shame variants={BoxAxisYHover} initial="start" animate="end" />
-          <Hurt variants={BoxAxisYHover} initial="start" animate="end" />
-          <Shame variants={BoxAxisYHover} initial="start" animate="end" />
-          <Hurt variants={BoxAxisYHover} initial="start" animate="end" />
-          <Shame variants={BoxAxisYHover} initial="start" animate="end" />
+          <TopBox variants={BoxAxisY} initial="start1" animate="end1" />
+          <BottomBox variants={BoxAxisY} initial="start1" animate="end1" />
+          <TopBox variants={BoxAxisY} initial="start1" animate="end1" />
+          <BottomBox variants={BoxAxisY} initial="start1" animate="end1" />
+          <TopBox variants={BoxAxisY} initial="start1" animate="end1" />
+          <BottomBox variants={BoxAxisY} initial="start1" animate="end1" />
+          <TopBox variants={BoxAxisY} initial="start1" animate="end1" />
+          <BottomBox variants={BoxAxisY} initial="start1" animate="end1" />
+{/*       
+          <LeftBox variants={BoxAxisX} initial="start2" animate="end2" />
+          <RightBox variants={BoxAxisX} initial="start2" animate="end2" />
+          <LeftBox variants={BoxAxisX} initial="start2" animate="end2" />
+          <RightBox variants={BoxAxisX} initial="start2" animate="end2" />
+          <LeftBox variants={BoxAxisX} initial="start2" animate="end2" />
+          <RightBox variants={BoxAxisX} initial="start2" animate="end2" />
+          <LeftBox variants={BoxAxisX} initial="start2" animate="end2" />
+          <RightBox variants={BoxAxisX} initial="start2" animate="end2" /> */}
+        
         </EmotionBox>
+
+     
 
         <SvgBox viewBox="-10 -20 900 500" initial="hidden" animate="visible">
           <Gieok d="M 10 100 H150 V350" variants={draw} custom={2} />
 
-          <Jieut1 d="M 200 100 H 350  L 240 350" variants={draw} custom={3} />
-          <Jieut1 d="M 310 200, 380 350 " variants={draw} custom={3.5} />
+          <Jieut1 d="M 200 100 H 350  L 240 350" variants={draw} custom={2.5} />
+          <Jieut1 d="M 310 200, 380 350 " variants={draw} custom={3} />
 
-          <Jieut2 d="M 450 100, H 600  L 450 350" variants={draw} custom={4} />
-          <Jieut2 d="M 540 200, 590 350 " variants={draw} custom={4.5} />
+          <Jieut2 d="M 450 100, H 600  L 450 350" variants={draw} custom={3.5} />
+          <Jieut2 d="M 540 200, 590 350 " variants={draw} custom={4} />
 
-          <Rieul d="M 700 100, 850 100" variants={draw} custom={5} />
-          <Rieul d="M 850 100, L 850 200" variants={draw} custom={5.5} />
+          <Rieul d="M 700 100, 850 100" variants={draw} custom={4.5} />
+          <Rieul d="M 850 100, L 850 200" variants={draw} custom={5} />
           <Rieul
             d="M 850 200, H 700, V 350, H 850"
             variants={draw}
