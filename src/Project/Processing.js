@@ -23,8 +23,8 @@ const EmotionBox = styled(motion.div)`
   width: 100%;
   height: 100%;
   display: grid;
+  z-index: 1;
   grid-template-columns: repeat(8, 1fr);
-  z-index: 3;
 `;
 
 const Box = styled(motion.div)`
@@ -33,6 +33,7 @@ const Box = styled(motion.div)`
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 18%;
+    z-index: 2;
   }
   // 실체가 없어도 기능적인 부분만 상속하려면 가능함.
 `;
@@ -118,7 +119,7 @@ const TextBox = styled(motion.div)`
   top: 10%;
   left: 25%;
   transform: translate(50%, 50%);
-  z-index: 1;
+  z-index: 2;
 `;
 
 const Text = styled(motion.textarea)`
