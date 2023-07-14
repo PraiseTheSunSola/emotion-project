@@ -17,24 +17,25 @@ const EmotionBox = styled(motion.div)`
 `;
 
 const Box = styled(motion.div)`
+  // 실체가 없어도 기능적인 부분만 상속하려면 가능함.
+
   &:hover {
     z-index: 2;
   }
 `;
 
 const Anger = styled(Box)`
-  transform-origin: left;
+  transform-origin: top;
   background-color: aliceblue;
 `;
 
 const Sadness = styled(Box)`
-  transform-origin: ${(props) =>
-    props.hovered ? "right" : props.defaultOrigin};
+  transform-origin: top;
   background-color: antiquewhite;
 `;
 
 const Anxiety = styled(Box)`
-  transform-origin: right;
+  transform-origin: top;
   background-color: aqua;
 `;
 
@@ -44,42 +45,39 @@ const Hurt = styled(Box)`
 `;
 
 const Shame = styled(Box)`
-  transform-origin: bottom;
+  transform-origin: top;
   background-color: azure;
 `;
 
 const Happiness = styled(Box)`
-  transform-origin: right;
+  transform-origin: top;
   background-color: beige;
 `;
 
 const Love = styled(Box)`
-  transform-origin: left;
+  transform-origin: top;
   background-color: bisque;
 `;
 
 const Wish = styled(Box)`
-  transform-origin: right;
+  transform-origin: top;
   background-color: blueviolet;
 `;
 
-const BoxAxisXHover = {
+const BoxHover = {
   start: {
-    scaleX: 1.5,
-
-    transition: { duration: 1, type: "tween" },
-  },
-};
-
-const BoxAxisYHover = {
-  start: {
-    scaleY: 0,
+    scaleY: 1,
     transition: { duration: 2, type: "tween" },
   },
 
   end: {
-    scaleY: 1,
+    scaleY: 0.1,
     transition: { duration: 2, type: "tween" },
+  },
+
+  hover: {
+    scaleY: 1,
+    transition: { duration: 1, type: "tween" },
   },
 };
 
@@ -140,8 +138,6 @@ const inout = {
 
 export function Processing() {
   const [show, setShow] = useState(false);
-  const [hoveredSadness, setHoveredSadness] = useState(false);
-  const [showAnxiety, setShowAnxiety] = useState(false);
 
   function clickButton() {
     setShow((appear) => !appear);
@@ -152,51 +148,60 @@ export function Processing() {
       <Page>
         <EmotionBox>
           <Anger
-            variants={BoxAxisXHover}
-            whileHover="start"
-            onMouseEnter={() => {
-              setHoveredSadness(false);
-              setShowAnxiety(false);
-            }}
+            variants={BoxHover}
+            whileHover="hover"
+            initial="start"
+            animate="end"
           />
 
           <Sadness
-            variants={BoxAxisXHover}
-            whileHover="start"
-            onMouseEnter={() => setHoveredSadness(!showAnxiety)}
-            onMouseLeave={() => setHoveredSadness(false)}
-            hovered={hoveredSadness}
-            defaultOrigin={showAnxiety ? "left" : "right"}
+            variants={BoxHover}
+            whileHover="hover"
+            initial="start"
+            animate="end"
           />
 
           <Anxiety
-            variants={BoxAxisXHover}
-            whileHover="start"
-            onMouseEnter={() => {
-              setHoveredSadness(false);
-              setShowAnxiety(true);
-            }}
+            variants={BoxHover}
+            whileHover="hover"
+            initial="start"
+            animate="end"
           />
 
           <Hurt
-            variants={BoxAxisYHover}
-            whileHover="start"
+            variants={BoxHover}
             initial="start"
             animate="end"
+            whileHover="hover"
           />
 
           <Shame
-            variants={BoxAxisYHover}
-            whileHover="start"
+            variants={BoxHover}
             initial="start"
             animate="end"
+            whileHover="hover"
           />
 
-          <Happiness variants={BoxAxisXHover} whileHover="start" />
+          <Happiness
+            variants={BoxHover}
+            initial="start"
+            animate="end"
+            whileHover="hover"
+          />
 
-          <Love variants={BoxAxisXHover} whileHover="start" />
+          <Love
+            variants={BoxHover}
+            initial="start"
+            animate="end"
+            whileHover="hover"
+          />
 
-          <Wish variants={BoxAxisXHover} whileHover="start" />
+          <Wish
+            variants={BoxHover}
+            initial="start"
+            animate="end"
+            whileHover="hover"
+          />
         </EmotionBox>
       </Page>
       {/* ---------------------------------------------------------------------------- */}
