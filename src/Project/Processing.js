@@ -2,67 +2,99 @@ import styled from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Test1 from "../Emotions/10Fury.jpg";
+import Test2 from "../Emotions/11Grudge.jpg";
+import Test3 from "../Emotions/12sad.jpg";
+import Test4 from "../Emotions/1Anger.png";
+import Test5 from "../Emotions/2Disillusionment.jpg";
+import Test6 from "../Emotions/3frustrating.jpg";
+import Test7 from "../Emotions/4tantrum.jpg";
+import Test8 from "../Emotions/5Pigritia.jpg";
 const Page = styled.div`
+  position: relative;
   width: 100vw;
   height: 100vh;
   background-color: black;
 `;
 
 const EmotionBox = styled(motion.div)`
+  position: relative;
   display: block;
   width: 100%;
   height: 100%;
   display: grid;
   grid-template-columns: repeat(8, 1fr);
+  z-index: 3;
 `;
 
 const Box = styled(motion.div)`
-  // 실체가 없어도 기능적인 부분만 상속하려면 가능함.
-
+  border: 1px solid white;
   &:hover {
-    z-index: 2;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 18%;
   }
+  // 실체가 없어도 기능적인 부분만 상속하려면 가능함.
 `;
 
 const Anger = styled(Box)`
   transform-origin: top;
-  background-color: aliceblue;
+
+  &:hover {
+    background-image: url(${Test1});
+  }
 `;
 
 const Sadness = styled(Box)`
   transform-origin: top;
-  background-color: antiquewhite;
+  &:hover {
+    background-image: url(${Test2});
+  }
 `;
 
 const Anxiety = styled(Box)`
   transform-origin: top;
-  background-color: aqua;
+  &:hover {
+    background-image: url(${Test3});
+  }
 `;
 
 const Hurt = styled(Box)`
   transform-origin: top;
-  background-color: aquamarine;
+  &:hover {
+    background-image: url(${Test4});
+  }
 `;
 
 const Shame = styled(Box)`
   transform-origin: top;
-  background-color: azure;
+  &:hover {
+    background-image: url(${Test5});
+  }
 `;
 
 const Happiness = styled(Box)`
   transform-origin: top;
-  background-color: beige;
+  &:hover {
+    background-image: url(${Test6});
+  }
 `;
 
 const Love = styled(Box)`
   transform-origin: top;
-  background-color: bisque;
+  &:hover {
+    background-image: url(${Test7});
+  }
 `;
 
 const Wish = styled(Box)`
   transform-origin: top;
-  background-color: blueviolet;
+  &:hover {
+    background-image: url(${Test8});
+  }
 `;
+
+const Img = styled.img``;
 
 const BoxHover = {
   start: {
@@ -80,6 +112,22 @@ const BoxHover = {
     transition: { duration: 1, type: "tween" },
   },
 };
+
+const TextBox = styled(motion.div)`
+  position: absolute;
+  top: 10%;
+  left: 25%;
+  transform: translate(50%, 50%);
+  z-index: 1;
+`;
+
+const Text = styled(motion.textarea)`
+  width: 500px;
+  height: 500px;
+  background-color: white;
+  border: 5px solid green;
+  outline: outset green;
+`;
 
 // ------------------------------------------- 버튼
 const NavButtonCircle = styled(motion.div)`
@@ -152,7 +200,9 @@ export function Processing() {
             whileHover="hover"
             initial="start"
             animate="end"
-          />
+          >
+            <Img />
+          </Anger>
 
           <Sadness
             variants={BoxHover}
@@ -203,6 +253,10 @@ export function Processing() {
             whileHover="hover"
           />
         </EmotionBox>
+
+        <TextBox>
+          <Text />
+        </TextBox>
       </Page>
       {/* ---------------------------------------------------------------------------- */}
       <NavButtonCircle>
