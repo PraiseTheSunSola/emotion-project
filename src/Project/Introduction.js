@@ -6,13 +6,6 @@ import { Link } from "react-router-dom";
 
 const Page = styled.div`
   width: 100vw;
-  background: #8e9eab; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #eef2f3,
-    #8e9eab
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #eef2f3, #8e9eab);
   display: grid;
   grid-template-columns: repeat(5, 1fr);
 `;
@@ -145,10 +138,6 @@ export function Introduction() {
     setSelectedImage(i);
   };
 
-  const [show, setShow] = useState(false);
-  function clickButton() {
-    setShow((appear) => !appear);
-  }
   // const navigate = useNavigate();
   return (
     <>
@@ -185,43 +174,6 @@ export function Introduction() {
           </DeleteBtn>
         </Modal>
       )}
-
-      <NavButtonCircle>
-        <NavButton onClick={clickButton}>클릭</NavButton>
-        <AnimatePresence>
-          {show ? (
-            <Buttons>
-              <BackButton
-                variants={inout}
-                initial="start"
-                animate="end"
-                exit="exit"
-                // onClick={() => navigate(-1)}
-              >
-                <StyledLink to="/Regulation">이전</StyledLink>
-              </BackButton>
-
-              <MainButton
-                variants={inout}
-                initial="start"
-                animate="end"
-                exit="exit"
-              >
-                <StyledLink to="/">메인</StyledLink>
-              </MainButton>
-
-              <NextButton
-                variants={inout}
-                initial="start"
-                animate="end"
-                exit="exit"
-              >
-                <StyledLink to="/Processing">다음</StyledLink>
-              </NextButton>
-            </Buttons>
-          ) : null}
-        </AnimatePresence>
-      </NavButtonCircle>
     </>
   );
 }

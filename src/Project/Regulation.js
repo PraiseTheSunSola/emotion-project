@@ -27,7 +27,7 @@ const ImageBox = styled.div`
 const Img = styled(motion.img)`
   display: inline-block;
   width: 600px;
-  margin-top: 500px;
+  margin-top: 300px;
   margin-bottom: 500px;
 `;
 
@@ -37,77 +37,74 @@ const EndImg = styled(motion.img)`
   margin-top: 500px;
   margin-bottom: 50px;
 `;
-const H1 = styled(motion.h1)`
-  //왼쪽
+
+const H = styled(motion.h1)`
   display: inline-block;
-  width: 100px;
-  height: 200px;
   position: fixed;
+`;
+
+const H1 = styled(H)`
+  //왼쪽
+  width: 250px;
+  height: 100px;
   top: 270px;
   left: 200px;
 `;
 
-const H2 = styled(motion.h1)`
+const H2 = styled(H)`
   // 오른쪽
-  display: inline-block;
+
   width: 310px;
   height: 200px;
-  position: fixed;
   top: 200px;
   right: 300px;
   color: white;
 `;
 
-const H3 = styled(motion.h1)`
+const H3 = styled(H)`
   //왼쪽
-  display: inline-block;
+
   width: 300px;
   height: 200px;
-  position: fixed;
   top: 270px;
   left: 200px;
   color: white;
 `;
 
-const H4 = styled(motion.h1)`
+const H4 = styled(H)`
   // 오른쪽
-  display: inline-block;
+
   width: 50px;
   height: 200px;
-  position: fixed;
   top: 200px;
   right: 300px;
   color: white;
 `;
 
-const H5 = styled(motion.h1)`
+const H5 = styled(H)`
   //왼쪽
-  display: inline-block;
+
   width: 50px;
   height: 200px;
-  position: fixed;
   top: 270px;
   left: 200px;
   color: white;
 `;
 
-const H6 = styled(motion.h1)`
+const H6 = styled(H)`
   // 오른쪽
-  display: inline-block;
+
   width: 150px;
   height: 200px;
-  position: fixed;
   top: 200px;
   right: 300px;
   color: white;
 `;
 
-const H7 = styled(motion.h1)`
+const H7 = styled(H)`
   //왼쪽
-  display: inline-block;
   width: 280px;
   height: 200px;
-  position: fixed;
   top: 270px;
   left: 200px;
   color: white;
@@ -259,41 +256,6 @@ export function Regulation() {
   return (
     <>
       <Page>
-        <NavButtonCircle>
-          <NavButton onClick={clickButton}>클릭</NavButton>
-          <AnimatePresence>
-            {show ? (
-              <Buttons>
-                <BackButton
-                  variants={inout}
-                  initial="start"
-                  animate="end"
-                  exit="exit"
-                >
-                  <StyledLink to="/Regulation">이전</StyledLink>
-                </BackButton>
-
-                <MainButton
-                  variants={inout}
-                  initial="start"
-                  animate="end"
-                  exit="exit"
-                >
-                  <StyledLink to="/">메인</StyledLink>
-                </MainButton>
-
-                <NextButton
-                  variants={inout}
-                  initial="start"
-                  animate="end"
-                  exit="exit"
-                >
-                  <StyledLink to="/Introduction">다음</StyledLink>
-                </NextButton>
-              </Buttons>
-            ) : null}
-          </AnimatePresence>
-        </NavButtonCircle>
         <ImageBox>
           <Img
             src={Regulation3}
@@ -305,7 +267,7 @@ export function Regulation() {
           />
 
           <H1 style={{ color: color1, opacity: scrollOpacity1 }}>
-            아침과 함께 우리의 감정도 눈을 뜬다.
+            수많은 감정들은 우리와 함께합니다.
           </H1>
 
           <Img
@@ -318,7 +280,7 @@ export function Regulation() {
           />
 
           <H2 style={{ color: color2, opacity: scrollOpacity2 }}>
-            새어 나오지 않게 잘 숨기려 하지만
+            남에게 들키지 않기 위해 항상 노력하죠.
           </H2>
 
           <Img
@@ -331,7 +293,7 @@ export function Regulation() {
           />
 
           <H3 style={{ color: color3, opacity: scrollOpacity3 }}>
-            이따금 통제할 수 없는 재해처럼 우리를 덧씌우려 한다.
+            그래도 감정의 소용돌이에 휘말리는건 어쩔수 없습니다.
           </H3>
 
           <Img
@@ -344,7 +306,7 @@ export function Regulation() {
           />
 
           <H4 style={{ color: color4, opacity: scrollOpacity4 }}>
-            선명한 부정은
+            억지로 지우려고 해도 쉽게 사라지지 않고,
           </H4>
 
           <Img
@@ -357,7 +319,7 @@ export function Regulation() {
           />
 
           <H5 style={{ color: color5, opacity: scrollOpacity5 }}>
-            발버둥치는 아기와 같으니,
+            마르지 않는 샘과 같으니
           </H5>
 
           <Img
