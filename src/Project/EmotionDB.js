@@ -8,6 +8,16 @@ import SelfProtection from "../Emotions/7selfProtection.jpg";
 import Irritate from "../Emotions/8Irritate.jpg";
 import Disgust from "../Emotions/9disgust.jpg";
 import Fury from "../Emotions/10Fury.jpg";
+import Sadness from "../Emotions/11Sadness.jpg";
+import Disappointment from "../Emotions/12disappointment.jpg";
+import incompetence from "../Emotions/13incompetence.jpg";
+import sorrow from "../Emotions/14sorrow.jpg";
+import regret from "../Emotions/15regret.jpg";
+import depression from "../Emotions/16depression.jpg";
+import miserable from "../Emotions/17miserable.jpg";
+import lethargy from "../Emotions/18lethargy.jpg";
+import despondency from "../Emotions/19despondency.jpg";
+import anguish from "../Emotions/20anguish.jpg";
 const EmotionKind = [
   {
     id: 1,
@@ -71,6 +81,70 @@ const EmotionKind = [
     title: "FURY (격노)",
     image: Fury,
     text: "몹시 분하고 노여운 감정이 북받쳐 오름",
+  },
+
+  {
+    id: 11,
+    title: "SADNESS (슬픔)",
+    image: Sadness,
+    text: "인간이나 동물이 어떤 손실, 실망, 불행, 또는 아픔과 관련하여 느끼는 것",
+  },
+  {
+    id: 12,
+    title: "DISAPPOINTMENT (실망)",
+    image: Disappointment,
+    text: "기대한 것이나 바랐던 결과와는 다른, 기대에 미치지 못하는 결과로 인해 느끼는 것",
+  },
+  {
+    id: 13,
+    title: "INCOMPETENCE (무능함)",
+    image: incompetence,
+    text: "어떤 작업이나 임무를 수행하는 능력이나 기술이 부족하여 성과를 얻지 못하는 상태",
+  },
+  {
+    id: 14,
+    title: "SORROW (애달픔)",
+    image: sorrow,
+    text: "큰 슬픔이나 비애를 느끼는 상태를 나타냅니다. 주로 중대한 손실이나 비극적인 사건으로 인해 발생하는 깊은 슬픔",
+  },
+  {
+    id: 15,
+    title: "REGRET (후회)",
+    image: regret,
+    text: "어떤 행동이나 결정으로 인해 자신의 선택에 대해 미안하고 반성하는 감정",
+  },
+  {
+    id: 16,
+    title: "DEPRESSION (우울증)",
+    image: depression,
+    text: "지속적인 기분의 저하, 무력감, 흥분이 떨어지는 등의 감정과 함께 사회적, 인지적, 신체적 증상들을 동반하는 심한 정신적 장애를 의미",
+  },
+  {
+    id: 17,
+    title: "MISERABLE (비참한)",
+    image: miserable,
+    text: "불쾌하고 불행한 상태를 강조하며, 주로 안타깝고 불운하게 여겨지는 것",
+  },
+
+  {
+    id: 18,
+    title: "LETHARGY (무기력)",
+    image: lethargy,
+    text: "활기가 없거나 에너지가 없고 활동적이지 않으며 느리고 기운이 없는 것",
+  },
+
+  {
+    id: 19,
+    title: "DESPONDENCY (낙담)",
+    image: despondency,
+    text: "극도로 실망하거나 희망을 잃은 상태. 특히 어떤 희망이나 기대를 두고 있었지만 이루어지지 않아 실망한 상태",
+  },
+
+  {
+    id: 20,
+    title: "ANGUISH (고통)",
+    image: anguish,
+    text: "극도로 심한 고통이나 괴로움을 의미",
   },
 ];
 

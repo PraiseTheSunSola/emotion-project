@@ -4,6 +4,14 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
+const Title = styled.title`
+  display: block;
+  display: flex;
+  justify-content: center;
+  font-size: 100px;
+  margin-bottom: 50px;
+`;
+
 const Page = styled.div`
   width: 100vw;
   display: grid;
@@ -42,7 +50,7 @@ const Img = styled(motion.img)`
 const Modal = styled(motion.div)`
   position: fixed;
   width: 500px;
-  height: 600px;
+  height: 700px;
   top: 40%;
   left: 50%;
   background-color: white;
@@ -141,13 +149,23 @@ export function Introduction() {
   // const navigate = useNavigate();
   return (
     <>
+      <Title>TYPES</Title>
       <Page>
         {EmotionDB.map((Emotion, i) => (
           <BigBox
             key={Emotion.id}
             initial={{ x: i < 5 ? "-100%" : "100%" }}
             animate={{
-              x: i < 5 ? ["-100%", "100%", "-100%"] : ["100%", "-100%", "100%"],
+              x:
+                i >= 5
+                  ? i >= 10
+                    ? ["-100%", "100%", "-100%"]
+                    : ["100%", "-100%", "100%"]
+                  : ["100%", "-100%", "100%"],
+              // x:
+              //   i >= 10
+              //     ? ["100%", "-100%", "100%"]
+              //     : ["-100%", "100%", "-100%"],
               transition: { duration: 50, repeat: Infinity },
             }}
           >

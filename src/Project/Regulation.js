@@ -15,6 +15,14 @@ import {
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
+const Title = styled.title`
+display: block;
+display: flex;
+justify-content: center;
+font-size: 100px;
+margin-bottom: 50px;
+`;
+
 const Page = styled.div`
   width: 100vw;
   overflow: hidden;
@@ -45,8 +53,6 @@ const H = styled(motion.h1)`
 
 const H1 = styled(H)`
   //왼쪽
-  width: 250px;
-  height: 100px;
   top: 270px;
   left: 200px;
 `;
@@ -74,7 +80,7 @@ const H3 = styled(H)`
 const H4 = styled(H)`
   // 오른쪽
 
-  width: 50px;
+  width: 250px;
   height: 200px;
   top: 200px;
   right: 300px;
@@ -84,8 +90,8 @@ const H4 = styled(H)`
 const H5 = styled(H)`
   //왼쪽
 
-  width: 50px;
-  height: 200px;
+  /* width: 300px; */
+  /* height: 200px; */
   top: 270px;
   left: 200px;
   color: white;
@@ -94,7 +100,7 @@ const H5 = styled(H)`
 const H6 = styled(H)`
   // 오른쪽
 
-  width: 150px;
+  width: 200px;
   height: 200px;
   top: 200px;
   right: 300px;
@@ -250,11 +256,12 @@ export function Regulation() {
   const color7 = useTransform(
     scrollYProgress,
     [0.89, 0.9, 0.98, 1.5],
-    ["black", "black", "black", "black"]
+    ["black", "black", "black", "red"]
   );
 
   return (
     <>
+    <Title>INTRO</Title>
       <Page>
         <ImageBox>
           <Img
@@ -267,7 +274,7 @@ export function Regulation() {
           />
 
           <H1 style={{ color: color1, opacity: scrollOpacity1 }}>
-            수많은 감정들은 우리와 함께합니다.
+            수많은 감정들은 <br/>우리와 함께합니다.
           </H1>
 
           <Img
@@ -319,7 +326,7 @@ export function Regulation() {
           />
 
           <H5 style={{ color: color5, opacity: scrollOpacity5 }}>
-            마르지 않는 샘과 같으니
+            휘몰아치는 파도와 같이 <br/>몰아치는 녀석을
           </H5>
 
           <Img
@@ -332,7 +339,7 @@ export function Regulation() {
           />
 
           <H6 style={{ color: color6, opacity: scrollOpacity6 }}>
-            기록하고 정리하며 알아가자!
+            받아들이고 <br/>관리하여 <br/><br/>내 것으로 <br/>만들어야 합니다.
           </H6>
 
           <EndImg
@@ -343,7 +350,7 @@ export function Regulation() {
             }}
           />
           <H7 style={{ color: color7, opacity: scrollOpacity7 }}>
-            아침과 함께 감정만 피어난 내가 될 수 있으니.
+            그렇지 않으면 <br/>감정에 지배된 <br/>동물이 될 테니까요.
           </H7>
         </ImageBox>
       </Page>

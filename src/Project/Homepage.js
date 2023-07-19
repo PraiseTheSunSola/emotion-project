@@ -49,7 +49,7 @@ export function Homepage() {
   return (
     <>
       <Page>
-        <SvgBox viewBox="-50 -50 800 600" initial="hidden" animate="visible">
+        <SvgBox viewBox="-50 50 800 600" initial="hidden" animate="visible">
           {/* E */}
           <E
             d="M 50 100 V 400 H 180 V 350 H 100 V 250 H 160 V 200 H 100 V 100 H 180"
