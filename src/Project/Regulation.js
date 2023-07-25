@@ -16,15 +16,30 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Title = styled.title`
-display: block;
-display: flex;
-justify-content: center;
-font-size: 100px;
-margin-bottom: 50px;
+  display: block;
+  display: flex;
+  justify-content: center;
+  font-size: 100px;
+  margin-bottom: 50px;
+`;
+
+const ScrollBar = styled(motion.div)`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 1903;
+  height: 10px;
+  transform-origin: left;
+`;
+
+const ProgressBar = styled(ScrollBar)`
+  background-color: #ff0055;
 `;
 
 const Page = styled.div`
   width: 100vw;
+  border-top: 2px solid black;
   overflow: hidden;
 `;
 const ImageBox = styled.div`
@@ -256,13 +271,15 @@ export function Regulation() {
   const color7 = useTransform(
     scrollYProgress,
     [0.89, 0.9, 0.98, 1.5],
-    ["black", "black", "black", "red"]
+    ["black", "black", "black", "black"]
   );
 
+  const scrollX = useTransform(scrollYProgress, [0, 1], [0, 1]);
   return (
     <>
-    <Title>INTRO</Title>
+      <Title>INTRO</Title>
       <Page>
+        <ProgressBar style={{ scaleX: scrollX }} />
         <ImageBox>
           <Img
             src={Regulation3}
@@ -274,7 +291,8 @@ export function Regulation() {
           />
 
           <H1 style={{ color: color1, opacity: scrollOpacity1 }}>
-            수많은 감정들은 <br/>우리와 함께합니다.
+            수많은 감정들은 <br />
+            우리와 함께합니다.
           </H1>
 
           <Img
@@ -326,7 +344,8 @@ export function Regulation() {
           />
 
           <H5 style={{ color: color5, opacity: scrollOpacity5 }}>
-            휘몰아치는 파도와 같이 <br/>몰아치는 녀석을
+            휘몰아치는 파도와 같이 <br />
+            몰아치는 녀석을
           </H5>
 
           <Img
@@ -339,7 +358,10 @@ export function Regulation() {
           />
 
           <H6 style={{ color: color6, opacity: scrollOpacity6 }}>
-            받아들이고 <br/>관리하여 <br/><br/>내 것으로 <br/>만들어야 합니다.
+            받아들이고 <br />
+            관리하여 <br />
+            <br />내 것으로 <br />
+            만들어야 합니다.
           </H6>
 
           <EndImg
@@ -350,7 +372,9 @@ export function Regulation() {
             }}
           />
           <H7 style={{ color: color7, opacity: scrollOpacity7 }}>
-            그렇지 않으면 <br/>감정에 지배된 <br/>동물이 될 테니까요.
+            그렇지 않으면 <br />
+            감정에 지배된 <br />
+            동물이 될 테니까요.
           </H7>
         </ImageBox>
       </Page>
