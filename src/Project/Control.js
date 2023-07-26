@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { EmotionControl } from "./EmotionControlDB";
+import { useEffect } from "react";
 const Page = styled.section`
   position: relative;
   width: 100vw;
@@ -12,10 +13,11 @@ const Page = styled.section`
 `;
 
 const Title = styled.title`
-  display: flex;
-  justify-content: center;
+  display: inline-block;
+
   font-size: 100px;
   margin-bottom: 30px;
+  z-index: 2;
 `;
 
 const H2 = styled.h2`
@@ -37,7 +39,7 @@ const Nav = styled(motion.nav)`
   /* 네비게이션 스타일을 여기에 추가하세요 */
   position: absolute;
   top: 30px;
-  left: 200px;
+  left: 1%;
   width: 300px;
 `;
 
@@ -80,58 +82,31 @@ const itemVariants: Variants = {
 
 // ---------------------------------------------------- 메뉴 리스트
 
+// ---------------------------------------------------- 모달 내부
+
 const Modal = styled(motion.div)`
   position: absolute;
-  width: 1000px;
-  height: 700px;
-  top: 40%;
-  left: 60%;
-  background-color: white;
-  border: 5px solid black;
+  width: 81%;
+  height: 100%;
+  top: 53%;
+  left: 58%;
   transform: translate(-50%, -50%);
-  Img {
-    width: 100%;
-    height: 80%;
-  }
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 `;
-// ---------------------------------------------------- 모달 내부
-const EmotionBox = styled(motion.div)`
-  position: relative;
-  display: block;
+const ButtonBox = styled(motion.div)`
+  display: inline-block;
+`;
+const Img = styled.img`
   width: 100%;
   height: 100%;
-  display: grid;
-  z-index: 1;
-  grid-template-columns: repeat(8, 1fr);
 `;
 
-const Box = styled(motion.div)`
-  border: 1px solid white;
-  &:hover {
-  }
-  // 실체가 없어도 기능적인 부분만 상속하려면 가능함.
+const List = styled.button`
+  display: inline-block;
 `;
 
-const Anger = styled(Box)`
-  background-color: red;
-  transform-origin: top;
-  &:hover {
-  }
-`;
-
-const Sadness = styled(Box)`
-  transform-origin: top;
-  &:hover {
-  }
-`;
-
-const Anxiety = styled(Box)`
-  transform-origin: top;
-  &:hover {
-  }
-`;
-
-const BoxHover = {
+const BoxMotion = {
   start: {
     scaleY: 0,
     transition: { duration: 2, type: "tween" },
@@ -164,26 +139,17 @@ const DeleteBtn = styled.button`
   }
 `;
 
-const ButtonBox = styled(motion.div)`
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-`;
-
-const List = styled.button``;
-
 export function Control() {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedButton, setSelectedButton] = useState(null);
-  const [listButton, setListButton] = useState("");
+  const [listButton, setListButton] = useState(null);
 
   const ItemClick = (i) => {
     setSelectedButton(i); // 선택한 버튼 인덱스를 설정
-    setListButton(null);
+    setListButton(0);
   };
 
   const ListClick = (i) => {
-    console.log(EmotionControl[selectedButton].list[i]);
     setListButton(i);
   };
 
@@ -191,9 +157,16 @@ export function Control() {
     setSelectedButton(null); // 선택한 버튼 상태를 초기화하여 모달을 닫음
   };
 
+  // useEffect(() => {
+  //   if (selectedButton != null && listButton != null) {
+  //     console.log("hgdgh");
+  //     console.log(EmotionControl[selectedButton].list[listButton].image);
+  //   }
+  // }, [selectedButton, listButton]);
+
   return (
     <>
-      <Title>CONTROL</Title>
+      <Title>C O N T R O L</Title>
       <Page>
         <Nav
           initial={false}
@@ -241,29 +214,37 @@ export function Control() {
             {EmotionControl.map((B, i) => (
               <Item
                 variants={itemVariants}
-                key={i}
+                key={B.i}
                 onClick={() => ItemClick(i)}
               >
                 {B.title}
               </Item>
             ))}
           </Ul>
-        </Nav>
-        {selectedButton !== null && (
-          <Modal>
-            <ButtonBox>
-              {EmotionControl[selectedButton].list.map((C, i) => (
-                <List key={i} onClick={() => ListClick(i)}>
-                  {C.title}
-                </List>
-              ))}
-            </ButtonBox>
 
-            {listButton !== null && (
+          {selectedButton !== null && (
+            <div>
+              {EmotionControl[selectedButton].list.map((C, i) => (
+                <ButtonBox key={C.id}>
+                  <List onClick={() => ListClick(i)}>{C.title}</List>
+                </ButtonBox>
+              ))}
+            </div>
+          )}
+        </Nav>
+        {listButton !== null &&
+          selectedButton !== null &&
+          EmotionControl[selectedButton] !== null && (
+            <Modal>
+              <Img
+                src={EmotionControl[selectedButton].list[listButton].image}
+                alt={
+                  EmotionControl[selectedButton].list[listButton].description
+                }
+              />
               <P>{EmotionControl[selectedButton].list[listButton].text}</P>
-            )}
-          </Modal>
-        )}
+            </Modal>
+          )}
       </Page>
     </>
   );
