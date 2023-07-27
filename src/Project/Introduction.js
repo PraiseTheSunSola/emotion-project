@@ -1,15 +1,38 @@
 import styled from "styled-components";
+import { createGlobalStyle } from "styled-components";
 import { EmotionKind } from "./EmotionKind";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useRef } from "react";
+
+const Body = createGlobalStyle`
+
+::-webkit-scrollbar {
+  display: none;
+    /* opacity: 0; */
+    /* color: red; */
+    /* 스크롤바의 너비 */
+    /* 스크롤바 배경색 */
+  }
+  * {
+    scrollbar-width: none;
+  }
+
+`;
 
 const Title = styled.title`
   display: block;
   display: flex;
   justify-content: center;
   font-size: 100px;
+  text-shadow: 6px 5px gray;
   margin-bottom: 50px;
+  &:hover {
+    cursor: pointer;
+    color: red;
+  }
 `;
 
 const Page = styled.div`
@@ -33,6 +56,12 @@ const Button = styled(motion.button)`
   width: 100%;
   padding: 10px;
   font-size: 30px;
+  background-color: white;
+  &:hover {
+    cursor: pointer;
+    background-color: red;
+  }
+  box-shadow: 5px 5px;
 `;
 
 const IconContainer = styled(motion.div)`
@@ -45,9 +74,9 @@ const IconContainer = styled(motion.div)`
 const Ul = styled(motion.ul)`
   /* 목록 스타일 및 애니메이션을 여기에 추가하세요 */
   position: absolute;
-  right: -90%;
+  right: -110%;
   display: flex;
-  width: 800px;
+  width: 1000px;
   padding: 0;
 `;
 
@@ -55,10 +84,22 @@ const Item = styled(motion.button)`
   /* 항목 스타일 및 애니메이션을 여기에 추가하세요 */
   width: 100%;
   font-size: 20px;
-  margin-bottom: 10px;
+  margin-left: 30px;
+  background-color: white;
+  box-shadow: 5px 5px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: red;
+  }
+
+  &.active {
+    color: white;
+    background-color: black;
+  }
 `;
 
-const itemVariants: Variants = {
+const itemVariants = {
   open: {
     opacity: 1,
     y: 0,
@@ -70,10 +111,10 @@ const itemVariants: Variants = {
 // ---------------------------------------------------- 메뉴 리스트
 
 const BigBox = styled(motion.div)`
-position: absolute;
-top: 20%;
-display: grid;
-grid-template-columns: repeat(5,1fr);
+  position: absolute;
+  top: 20%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
   width: 100%;
   height: 300px;
 `;
@@ -91,6 +132,26 @@ const EmotionBox = styled(motion.div)`
   }
 `;
 
+const BoxMotion = {
+  start: {
+    y: window.innerWidth,
+    opacity: 0,
+    transition: { duration: 2, type: "spring" },
+  },
+
+  end: {
+    y: 0,
+    opacity: 1,
+    transition: { duration: 2, type: "spring" },
+  },
+
+  exit: {
+    y: window.innerWidth,
+    opacity: 0,
+    transition: { duration: 1, type: "tween" },
+  },
+};
+
 const Img = styled(motion.img)`
   width: 100%;
   height: 80%;
@@ -103,8 +164,6 @@ const Name = styled(motion.h3)`
 const Text = styled(motion.h3)`
   font-size: 20px;
 `;
-
-
 
 const Modal = styled(motion.div)`
   position: fixed;
@@ -135,91 +194,51 @@ const DeleteBtn = styled.button`
   }
 `;
 
-// ------------------------------------------- 버튼
-const NavButtonCircle = styled(motion.div)`
-  position: relative;
-  position: fixed;
-  top: 50%;
-  right: 10px;
-  width: 50px;
-  height: 250px;
-  /* background-color: red; */
-`;
-
-const NavButton = styled(motion.button)`
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  transform-origin: center center;
-
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
-const Buttons = styled(motion.div)`
-  position: absolute;
-  top: 30%;
-`;
-
-const BackButton = styled(motion.button)`
-  width: 50px;
-  height: 50px;
-`;
-
-const MainButton = styled(motion.button)`
-  width: 50px;
-  height: 50px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-`;
-
-const NextButton = styled(motion.button)`
-  width: 50px;
-  height: 50px;
-`;
-
-const StyledLink = styled(Link)`
-  color: black;
-  text-decoration: none;
-`;
-
-const inout = {
-  start: { opacity: 0, scale: 0 },
-  end: { opacity: 1, scale: 1, rotateZ: 0, transition: { type: "spring" } },
-  exit: { opacity: 0, scale: 0, rotateZ: 0 },
-};
-// ------------------------------------------- 버튼
-
 export function Introduction() {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null); // 이미지 클릭
   const [selectedButton, setSelectedButton] = useState(null);
-  const [listButton, setListButton] = useState("");
-
-  const ListClick = (i) => {
-    setSelectedButton(i); // 선택한 버튼 인덱스를 설정
-    setListButton(null);
-  };
+  const [selectedImage, setSelectedImage] = useState(null); // 이미지 클릭
+  const [emotionDB, setEmotionDB] = useState(EmotionKind);
+  const [active, setActive] = useState(false);
+  const [key, setKey] = useState(0);
 
   const ItemClick = (i) => {
-    setListButton(i);
+    setSelectedButton(i); // 선택한 버튼 인덱스를 설정
+    setActive(true);
+    increaseKey();
   };
+
+  function increaseKey() {
+    setKey((prev) => prev + 1);
+  }
 
   const ImageClick = (i) => {
     setSelectedImage(i);
+    console.log(EmotionKind[selectedButton][i]);
   };
+
+  function DeleteBtnClick(id) {
+    const updatedDB = emotionDB.filter((emotion) => emotion.id !== id);
+    console.log(updatedDB);
+    setEmotionDB(updatedDB);
+    setSelectedImage(null); // 선택 상태 초기화
+  }
 
   return (
     <>
-      <Title>TYPES</Title>
+      <Body />
+      <Title>T Y P E S</Title>
       <Page>
         <Nav
           initial={false}
           animate={isOpen ? "open" : "closed"}
           className="menu"
         >
-          <Button whileTap={{ scale: 0.97 }} onClick={() => setIsOpen(!isOpen)}>
+          <Button
+            whileTap={{ scale: 0.97 }}
+            onClick={() => setIsOpen(!isOpen)}
+            // className={active && isOpen ? "active" : ""}
+          >
             감정종류
             <IconContainer
               variants={{
@@ -261,31 +280,57 @@ export function Introduction() {
               <Item
                 variants={itemVariants}
                 key={i}
-                onClick={() => ListClick(i)}
+                onClick={() => ItemClick(i)}
+                className={active && i === selectedButton ? "active" : ""}
               >
                 {emotionArray[0].name}
               </Item>
             ))}
           </Ul>
         </Nav>
-    
-              <BigBox >
-              {selectedButton !== null &&
-               // console.log(EmotionKind[selectedButton])
-                EmotionKind[selectedButton].map((emotionArray, i) =>
-            i > 0 ? (
-                <EmotionBox key={i} onClick={() => ImageClick(i)}>
-                  <Img
-                    src={EmotionKind[selectedButton][i].image}
-                    alt={EmotionKind[selectedButton][i].description}
-                  />
-                  <Name>{EmotionKind[selectedButton][i].title}</Name>
-                </EmotionBox>
-            ) : null
-          )};
+        <AnimatePresence>
+          <BigBox
+            variants={BoxMotion}
+            initial="start"
+            animate="end"
+            exit="exit"
+            key={key}
+          >
+            {selectedButton !== null &&
+              // console.log(EmotionKind[selectedButton])
+              EmotionKind[selectedButton].map((emotionArray, i) =>
+                i > 0 ? (
+                  <EmotionBox key={i} onClick={() => ImageClick(i)}>
+                    <Img
+                      src={EmotionKind[selectedButton][i].image}
+                      alt={EmotionKind[selectedButton][i].description}
+                    />
+                    <Name>{EmotionKind[selectedButton][i].title}</Name>
+                  </EmotionBox>
+                ) : null
+              )}
+            ;
           </BigBox>
-        
+        </AnimatePresence>
       </Page>
+      {selectedImage !== null &&
+        selectedButton !== null && ( // 선택된 이미지가 있는 경우에만 모달창 표시
+          <Modal>
+            <Img
+              src={EmotionKind[selectedButton][selectedImage].image}
+              alt={EmotionKind[selectedButton][selectedImage].description}
+            />
+            <Name>{EmotionKind[selectedButton][selectedImage].title}</Name>
+            <Text>{EmotionKind[selectedButton][selectedImage].text}</Text>
+            <DeleteBtn
+              onClick={() =>
+                DeleteBtnClick(EmotionKind[selectedButton][selectedImage].id)
+              }
+            >
+              뒤로
+            </DeleteBtn>
+          </Modal>
+        )}
       ;
     </>
   );

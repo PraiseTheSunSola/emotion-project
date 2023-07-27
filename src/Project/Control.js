@@ -1,45 +1,43 @@
 import styled from "styled-components";
+import { createGlobalStyle } from "styled-components";
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { EmotionControl } from "./EmotionControlDB";
 import { useEffect } from "react";
-const Page = styled.section`
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  border-top: 2px solid black;
-  display: flex;
-  flex-direction: column;
+
+const Body = createGlobalStyle`
+
+::-webkit-scrollbar {
+  display: none;
+    /* opacity: 0; */
+    /* color: red; */
+    /* 스크롤바의 너비 */
+    /* 스크롤바 배경색 */
+  }
+  * {
+    scrollbar-width: none;
+  }
+
+
 `;
 
 const Title = styled.title`
   display: inline-block;
-
   font-size: 100px;
+  text-shadow: 6px 5px gray;
   margin-bottom: 30px;
-  z-index: 2;
+  &:hover {
+    cursor: pointer;
+    color: red;
+  }
 `;
 
-const H2 = styled.h2`
-  display: block;
-  font-size: 50px;
-`;
-
-const H3 = styled.h3`
-  display: block;
-  font-size: 30px;
-`;
-
-const P = styled.p`
-  display: inline-block;
-  font-size: 20px;
-`;
 // ---------------------------------------------------- 메뉴 리스트
 const Nav = styled(motion.nav)`
   /* 네비게이션 스타일을 여기에 추가하세요 */
   position: absolute;
-  top: 30px;
-  left: 1%;
+  top: 70px;
+  left: 40%;
   width: 300px;
 `;
 
@@ -48,6 +46,17 @@ const Button = styled(motion.button)`
   width: 100%;
   padding: 10px;
   font-size: 30px;
+  background-color: white;
+  box-shadow: 5px 5px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: red;
+  }
+  &.active {
+    color: white;
+    background-color: black;
+  }
 `;
 
 const IconContainer = styled(motion.div)`
@@ -59,7 +68,11 @@ const IconContainer = styled(motion.div)`
 
 const Ul = styled(motion.ul)`
   /* 목록 스타일 및 애니메이션을 여기에 추가하세요 */
-  width: 100%;
+  position: absolute;
+  top: -25%;
+  left: 110%;
+  display: flex;
+  width: 800px;
   height: 100%;
   padding: 0;
 `;
@@ -68,10 +81,55 @@ const Item = styled(motion.button)`
   /* 항목 스타일 및 애니메이션을 여기에 추가하세요 */
   width: 100%;
   font-size: 20px;
-  margin-bottom: 10px;
+  word-break: keep-all;
+  background-color: white;
+  margin-left: 10px;
+  box-shadow: 5px 5px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: red;
+  }
+
+  &.active {
+    color: white;
+    background-color: black;
+  }
 `;
 
-const itemVariants: Variants = {
+const ItemList = styled(motion.div)`
+  position: absolute;
+  left: 110%;
+  display: flex;
+  margin-top: 10px;
+  width: 800px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+`;
+
+const ButtonBox = styled(motion.div)`
+  display: inline-block;
+  margin-left: 10px;
+  box-shadow: 5px 5px;
+`;
+
+const ListButton = styled.button`
+  width: 100%;
+  height: 50px;
+  font-size: 20px;
+  background-color: white;
+
+  &:hover {
+    cursor: pointer;
+    background-color: red;
+  }
+  &.active {
+    color: white;
+    background-color: black;
+  }
+`;
+
+const itemVariants = {
   open: {
     opacity: 1,
     y: 0,
@@ -80,45 +138,96 @@ const itemVariants: Variants = {
   closed: { opacity: 0, y: 20, transition: { duration: 0.2 } },
 };
 
+const UlMotion = {
+  open: {
+    clipPath: "inset(0% 0% 0% 0% round 0px)",
+    transition: {
+      type: "spring",
+      bounce: 0,
+      duration: 0.7,
+      delayChildren: 0.3,
+      staggerChildren: 0.05,
+    },
+  },
+  closed: {
+    clipPath: "inset(10% 50% 90% 50% round 10px)",
+    transition: {
+      type: "spring",
+      bounce: 0,
+      duration: 0.3,
+    },
+  },
+};
+
+const ItemListMotion = {
+  open: {
+    clipPath: "inset(0% 0% 0% 0% round 0px)",
+    transition: {
+      type: "spring",
+      bounce: 0,
+      delay: 1,
+      duration: 0.7,
+      delayChildren: 0.3,
+      staggerChildren: 0.05,
+    },
+  },
+
+  closed: {
+    clipPath: "inset(10% 50% 90% 50% round 10px)",
+    transition: {
+      type: "spring",
+      bounce: 0,
+      duration: 0.3,
+    },
+  },
+};
+
 // ---------------------------------------------------- 메뉴 리스트
+
+const Page = styled.section`
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  border-top: 2px solid black;
+  overflow: hidden;
+`;
 
 // ---------------------------------------------------- 모달 내부
 
 const Modal = styled(motion.div)`
   position: absolute;
-  width: 81%;
-  height: 100%;
-  top: 53%;
-  left: 58%;
-  transform: translate(-50%, -50%);
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  width: 100%;
+  height: 100%;
 `;
-const ButtonBox = styled(motion.div)`
-  display: inline-block;
-`;
+
 const Img = styled.img`
   width: 100%;
   height: 100%;
 `;
 
-const List = styled.button`
-  display: inline-block;
+const P = styled.p`
+  font-size: 50px;
+  word-break: keep-all;
 `;
 
 const BoxMotion = {
   start: {
-    scaleY: 0,
-    transition: { duration: 2, type: "tween" },
+    y: -window.innerWidth,
+    opacity: 0,
+    transition: { duration: 2, type: "spring" },
   },
 
   end: {
-    scaleY: 1,
-    transition: { duration: 3, type: "tween" },
+    y: 0,
+    opacity: 1,
+    transition: { duration: 2, type: "spring" },
   },
 
-  hover: {
-    scaleX: 1.5,
+  exit: {
+    y: -window.innerWidth,
+    opacity: 0,
     transition: { duration: 1, type: "tween" },
   },
 };
@@ -143,108 +252,121 @@ export function Control() {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedButton, setSelectedButton] = useState(null);
   const [listButton, setListButton] = useState(null);
+  const [key, setKey] = useState(0);
+
+  const [active, setActive] = useState(false);
+  // const [renderCount, setRenderCount] = useState(0);
+
+  useEffect(() => {
+    console.log(active);
+  }, [selectedButton]);
 
   const ItemClick = (i) => {
     setSelectedButton(i); // 선택한 버튼 인덱스를 설정
     setListButton(0);
+    setActive(true);
   };
 
   const ListClick = (i) => {
+    // 이미 선택된 ListButton을 눌렀을 때, 아무 작업도 하지 않음
+    if (i === listButton) {
+      return;
+    }
+    setActive(true);
     setListButton(i);
+    increaseKey();
   };
 
   const DeleteBtnClick = () => {
     setSelectedButton(null); // 선택한 버튼 상태를 초기화하여 모달을 닫음
   };
 
-  // useEffect(() => {
-  //   if (selectedButton != null && listButton != null) {
-  //     console.log("hgdgh");
-  //     console.log(EmotionControl[selectedButton].list[listButton].image);
-  //   }
-  // }, [selectedButton, listButton]);
+  function increaseKey() {
+    setKey((prev) => prev + 1);
+  }
 
   return (
     <>
+      <Body />
       <Title>C O N T R O L</Title>
-      <Page>
-        <Nav
-          initial={false}
-          animate={isOpen ? "open" : "closed"}
-          className="menu"
+      <Nav
+        initial={false}
+        animate={isOpen ? "open" : "closed"}
+        className="menu"
+      >
+        <Button
+          whileTap={{ scale: 0.97 }}
+          onClick={() => setIsOpen(!isOpen)}
+          // className={active && isOpen ? "active" : ""}
         >
-          <Button whileTap={{ scale: 0.97 }} onClick={() => setIsOpen(!isOpen)}>
-            감정관리
-            <IconContainer
-              variants={{
-                open: { rotate: 180 },
-                closed: { rotate: 0 },
-              }}
-              transition={{ duration: 0.2 }}
-              style={{ originY: 0.55 }}
-            >
-              <svg width="15" height="15" viewBox="0 0 20 20">
-                <path d="M0 7 L 20 7 L 10 16" />
-              </svg>
-            </IconContainer>
-          </Button>
-          <Ul
+          감정관리
+          <IconContainer
             variants={{
-              open: {
-                clipPath: "inset(0% 0% 0% 0% round 0px)",
-                transition: {
-                  type: "spring",
-                  bounce: 0,
-                  duration: 0.7,
-                  delayChildren: 0.3,
-                  staggerChildren: 0.05,
-                },
-              },
-              closed: {
-                clipPath: "inset(10% 50% 90% 50% round 10px)",
-                transition: {
-                  type: "spring",
-                  bounce: 0,
-                  duration: 0.3,
-                },
-              },
+              open: { rotate: -90 },
+              closed: { rotate: 0 },
             }}
-            style={{ pointerEvents: isOpen ? "auto" : "none" }}
+            transition={{ duration: 0.2 }}
+            style={{ originY: 0.55 }}
           >
-            {EmotionControl.map((B, i) => (
-              <Item
-                variants={itemVariants}
-                key={B.i}
-                onClick={() => ItemClick(i)}
-              >
-                {B.title}
-              </Item>
-            ))}
-          </Ul>
+            <svg width="15" height="15" viewBox="0 0 20 20">
+              <path d="M0 7 L 20 7 L 10 16" />
+            </svg>
+          </IconContainer>
+        </Button>
+        <Ul
+          variants={UlMotion}
+          style={{ pointerEvents: isOpen ? "auto" : "none" }}
+        >
+          {EmotionControl.map((B, i) => (
+            <Item
+              key={B.id}
+              variants={itemVariants}
+              onClick={() => ItemClick(i)}
+              className={active && i === selectedButton ? "active" : ""}
+            >
+              {B.title}
+            </Item>
+          ))}
+        </Ul>
 
-          {selectedButton !== null && (
-            <div>
-              {EmotionControl[selectedButton].list.map((C, i) => (
-                <ButtonBox key={C.id}>
-                  <List onClick={() => ListClick(i)}>{C.title}</List>
-                </ButtonBox>
-              ))}
-            </div>
-          )}
-        </Nav>
-        {listButton !== null &&
-          selectedButton !== null &&
-          EmotionControl[selectedButton] !== null && (
-            <Modal>
-              <Img
-                src={EmotionControl[selectedButton].list[listButton].image}
-                alt={
-                  EmotionControl[selectedButton].list[listButton].description
-                }
-              />
-              <P>{EmotionControl[selectedButton].list[listButton].text}</P>
-            </Modal>
-          )}
+        {selectedButton !== null && (
+          <ItemList variants={ItemListMotion}>
+            {EmotionControl[selectedButton].list.map((C, i) => (
+              <ButtonBox key={C.id}>
+                <ListButton
+                  onClick={() => ListClick(i)}
+                  className={active && i === listButton ? "active" : ""}
+                >
+                  {C.title}
+                </ListButton>
+              </ButtonBox>
+            ))}
+          </ItemList>
+        )}
+      </Nav>
+      <Page>
+        <AnimatePresence>
+          {listButton !== null &&
+            selectedButton !== null &&
+            EmotionControl[selectedButton] !== null && (
+              <Modal
+                variants={BoxMotion}
+                initial="start"
+                animate="end"
+                exit="exit"
+                key={key}
+              >
+                <Img
+                  src={EmotionControl[selectedButton].list[listButton].image}
+                  alt={
+                    EmotionControl[selectedButton].list[listButton].description
+                  }
+                />
+
+                <P>{EmotionControl[selectedButton].list[listButton].text}</P>
+              </Modal>
+            )}
+        </AnimatePresence>
       </Page>
     </>
   );

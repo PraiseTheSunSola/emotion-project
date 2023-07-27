@@ -16,11 +16,16 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Title = styled.title`
-  display: block;
+  display: inline-block;
   display: flex;
   justify-content: center;
   font-size: 100px;
+  text-shadow: 6px 5px gray;
   margin-bottom: 50px;
+  &:hover {
+    cursor: pointer;
+    color: red;
+  }
 `;
 
 const ScrollBar = styled(motion.div)`
@@ -277,7 +282,7 @@ export function Regulation() {
   const scrollX = useTransform(scrollYProgress, [0, 1], [0, 1]);
   return (
     <>
-      <Title>INTRO</Title>
+      <Title>I N T R O</Title>
       <Page>
         <ProgressBar style={{ scaleX: scrollX }} />
         <ImageBox>

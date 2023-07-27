@@ -126,10 +126,14 @@ const C17 = {
   text: "감정을 내면에 묻어두지 않고 표현하고, 소중한 사람들과 솔직하게 소통하는 것이 중요합니다. 누군가와 이야기를 나누는 것은 정서적인 부담을 덜어내고 해소하는 데에 도움이 됩니다.",
 };
 
-export const B0 = { title: "감정의 인식", list: [C0, C1, C2] };
-export const B1 = { title: "감정의 표현", list: [C3, C4, C5] };
-export const B2 = { title: "감정의 조절", list: [C6, C7, C8] };
-export const B3 = { title: "스트레스 관리", list: [C9, C10, C11] };
-export const B4 = { title: "긍정적인 감정 강화", list: [C12, C13, C14] };
-export const B5 = { title: "정서적 자기 돌봄", list: [C15, C16, C17] };
+export const B0 = { id: 0, title: "감정의 인식", list: [C0, C1, C2] };
+export const B1 = { id: 1, title: "감정의 표현", list: [C3, C4, C5] };
+export const B2 = { id: 2, title: "감정의 조절", list: [C6, C7, C8] };
+export const B3 = { id: 3, title: "스트레스 관리", list: [C9, C10, C11] };
+export const B4 = { id: 4, title: "긍정적인 감정 강화", list: [C12, C13, C14] };
+export const B5 = {
+  id: 5,
+  title: "　정서적　자기 돌봄",
+  list: [C15, C16, C17],
+};
 export const EmotionControl = [B0, B1, B2, B3, B4, B5];

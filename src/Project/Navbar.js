@@ -11,6 +11,12 @@ const Page = styled(NavLink)`
   text-decoration: none;
   font-size: 20px;
   font-weight: 600;
+  &:hover {
+    text-shadow: 1px 17px gray;
+  }
+  &.active {
+    color: red;
+  }
 `;
 
 export function Navbar() {
@@ -19,9 +25,9 @@ export function Navbar() {
       <Home>
         <Page to="/"></Page>
         <Page to="/">Home</Page>
-        <Page to="/Regulation">Intro</Page>
-        <Page to="/Introduction">Types</Page>
-        <Page to="/Control">Control</Page>
+        <Page to="/Regulation">INTRO</Page>
+        <Page to="/Introduction">TYPES</Page>
+        <Page to="/Control">CONTROL</Page>
       </Home>
       <Outlet />
     </>
