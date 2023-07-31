@@ -13,18 +13,18 @@ import {
   useTransform,
 } from "framer-motion";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 
-const Title = styled.title`
+const Title = styled(motion.title)`
   display: inline-block;
   display: flex;
   justify-content: center;
   font-size: 100px;
-  text-shadow: 6px 5px gray;
+
+  margin-top: 50px;
   margin-bottom: 50px;
   &:hover {
-    cursor: pointer;
     color: red;
+    text-shadow: 6px 5px gray;
   }
 `;
 
@@ -42,11 +42,28 @@ const ProgressBar = styled(ScrollBar)`
   background-color: #ff0055;
 `;
 
-const Page = styled.div`
+const Page = styled(motion.div)`
   width: 100vw;
   border-top: 2px solid black;
   overflow: hidden;
 `;
+
+const PageMotion = {
+  start: {
+    // "background-color": "black",
+    // clipPath:   "circle(0%)",
+    border: "500px solid black",
+    transition: { duration: 1.5, type: "tween" },
+  },
+  end: {
+    // "background-color": "black",
+    // clipPath: "circle(100%)",
+    border: "0px solid black",
+
+    transition: { duration: 1.5, type: "tween" },
+  },
+};
+
 const ImageBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -138,7 +155,7 @@ const H7 = styled(H)`
 
 // ------------------------------------------- 버튼
 
-const NavButtonCircle = styled(motion.div)`
+const MoveTopBottomButtonBox = styled(motion.div)`
   position: relative;
   position: fixed;
   top: 50%;
@@ -148,13 +165,13 @@ const NavButtonCircle = styled(motion.div)`
   /* background-color: red; */
 `;
 
-const NavButton = styled(motion.button)`
+const MoveTopBottomButton = styled(motion.button)`
   position: absolute;
   width: 50px;
   height: 50px;
   transform-origin: center center;
-  /* top: 30%;
-  left: 40%; */
+  border: 1px solid black;
+  background-color: white;
 `;
 
 const Buttons = styled(motion.div)`
@@ -162,29 +179,25 @@ const Buttons = styled(motion.div)`
   top: 30%;
 `;
 
-const BackButton = styled(motion.button)`
+const MovePageTop = styled(motion.button)`
   width: 50px;
   height: 50px;
 `;
 
-const MainButton = styled(motion.button)`
+const MovePageBottom = styled(motion.button)`
   width: 50px;
   height: 50px;
   margin-top: 10px;
   margin-bottom: 10px;
 `;
 
-const NextButton = styled(motion.button)`
-  width: 50px;
-  height: 50px;
-`;
+const MoveTop = {
+  start: { opacity: 0, scale: 0 },
+  end: { opacity: 1, scale: 1, rotateZ: 0, transition: { type: "spring" } },
+  exit: { opacity: 0, scale: 0, rotateZ: 0 },
+};
 
-const StyledLink = styled(Link)`
-  color: black;
-  text-decoration: none;
-`;
-
-const inout = {
+const MoveBottom = {
   start: { opacity: 0, scale: 0 },
   end: { opacity: 1, scale: 1, rotateZ: 0, transition: { type: "spring" } },
   exit: { opacity: 0, scale: 0, rotateZ: 0 },
@@ -194,11 +207,21 @@ const inout = {
 
 export function Regulation() {
   const [show, setShow] = useState(false);
+
   function clickButton() {
     setShow((appear) => !appear);
   }
 
-  // const navigate = useNavigate();
+  const ClickMoveTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const ClickMoveBottom = () => {
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: "smooth",
+    });
+  };
 
   const { scrollYProgress } = useScroll();
 
@@ -280,10 +303,13 @@ export function Regulation() {
   );
 
   const scrollX = useTransform(scrollYProgress, [0, 1], [0, 1]);
+
   return (
     <>
-      <Title>I N T R O</Title>
-      <Page>
+      <Title variants={PageMotion} initial="start" animate="end">
+        I N T R O
+      </Title>
+      <Page variants={PageMotion} initial="start" animate="end">
         <ProgressBar style={{ scaleX: scrollX }} />
         <ImageBox>
           <Img
@@ -383,6 +409,39 @@ export function Regulation() {
           </H7>
         </ImageBox>
       </Page>
+
+      <MoveTopBottomButtonBox
+        variants={PageMotion}
+        initial="start"
+        animate="end"
+      >
+        <MoveTopBottomButton onClick={clickButton}>클릭</MoveTopBottomButton>
+        <AnimatePresence>
+          {show ? (
+            <Buttons>
+              <MovePageTop
+                variants={MoveTop}
+                initial="start"
+                animate="end"
+                exit="exit"
+                onClick={() => ClickMoveTop()}
+              >
+                맨 위
+              </MovePageTop>
+
+              <MovePageBottom
+                variants={MoveBottom}
+                initial="start"
+                animate="end"
+                exit="exit"
+                onClick={() => ClickMoveBottom()}
+              >
+                맨 아래
+              </MovePageBottom>
+            </Buttons>
+          ) : null}
+        </AnimatePresence>
+      </MoveTopBottomButtonBox>
     </>
   );
 }

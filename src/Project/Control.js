@@ -21,14 +21,15 @@ const Body = createGlobalStyle`
 
 `;
 
-const Title = styled.title`
+const Title = styled(motion.title)`
   display: inline-block;
   font-size: 100px;
-  text-shadow: 6px 5px gray;
+
+  margin-top: 50px;
   margin-bottom: 30px;
   &:hover {
-    cursor: pointer;
     color: red;
+    text-shadow: 6px 5px gray;
   }
 `;
 
@@ -184,13 +185,29 @@ const ItemListMotion = {
 
 // ---------------------------------------------------- 메뉴 리스트
 
-const Page = styled.section`
+const Page = styled(motion.section)`
   position: relative;
   width: 100vw;
   height: 100vh;
   border-top: 2px solid black;
   overflow: hidden;
 `;
+
+const PageMotion = {
+  start: {
+    // "background-color": "black",
+    // clipPath:   "circle(0%)",
+    border: "500px solid black",
+    transition: { duration: 1.5, type: "tween" },
+  },
+  end: {
+    // "background-color": "black",
+    // clipPath: "circle(100%)",
+    border: "0px solid black",
+
+    transition: { duration: 1.5, type: "tween" },
+  },
+};
 
 // ---------------------------------------------------- 모달 내부
 
@@ -288,7 +305,11 @@ export function Control() {
   return (
     <>
       <Body />
-      <Title>C O N T R O L</Title>
+
+      <Title variants={PageMotion} initial="start" animate="end">
+        C O N T R O L
+      </Title>
+
       <Nav
         initial={false}
         animate={isOpen ? "open" : "closed"}
@@ -297,6 +318,7 @@ export function Control() {
         <Button
           whileTap={{ scale: 0.97 }}
           onClick={() => setIsOpen(!isOpen)}
+
           // className={active && isOpen ? "active" : ""}
         >
           감정관리
@@ -344,7 +366,8 @@ export function Control() {
           </ItemList>
         )}
       </Nav>
-      <Page>
+
+      <Page variants={PageMotion} initial="start" animate="end">
         <AnimatePresence>
           {listButton !== null &&
             selectedButton !== null &&

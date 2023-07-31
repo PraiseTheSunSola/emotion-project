@@ -2,7 +2,9 @@ import { NavLink, Outlet } from "react-router-dom";
 import styled from "styled-components";
 
 const Home = styled.div`
-  margin-bottom: 30px;
+  display: inline-block;
+  position: fixed;
+  top: 20px;
 `;
 
 const Page = styled(NavLink)`

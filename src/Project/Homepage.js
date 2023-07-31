@@ -3,14 +3,31 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const Page = styled.div`
+const Page = styled(motion.div)`
   width: 100vw;
   height: 100vh;
-  background-color: white;
   display: flex;
   align-items: center;
   justify-content: center;
+ 
 `;
+
+const PageMotion = {
+
+  start: {
+    // "background-color": "black",
+    // clipPath:   "circle(0%)",
+    "border": "500px solid black",
+    transition: { duration: 1.5, type: "tween"}
+  },
+  end: {
+    // "background-color": "black",
+    // clipPath: "circle(100%)",
+    "border": "0px solid black",
+    
+    transition: { duration: 1.5, type: "tween"}
+  },
+}
 
 const SvgBox = styled(motion.svg)`
   display: inline-block;
@@ -94,11 +111,11 @@ const Buttons = styled(motion.div)`
 const IntroButton = styled(motion.button)`
   width: 170px;
   height: 100px;
-  font-size: 30px;
+  font-size: 45px;
   background-color: white;
   box-shadow: 5px 5px;
   &:hover {
-    cursor: pointer;
+    /* cursor: pointer; */
     color: white;
     background-color: red;
     box-shadow: 5px 5px black;
@@ -108,11 +125,11 @@ const IntroButton = styled(motion.button)`
 const TypesButton = styled(motion.button)`
   width: 170px;
   height: 100px;
-  font-size: 30px;
+  font-size: 45px;
   background-color: white;
   box-shadow: 5px 5px;
   &:hover {
-    cursor: pointer;
+    /* cursor: pointer; */
     color: red;
     background-color: red;
     box-shadow: 5px 5px black;
@@ -126,7 +143,7 @@ const ControlButton = styled(motion.button)`
   background-color: white;
   box-shadow: 5px 5px;
   &:hover {
-    cursor: pointer;
+    /* cursor: pointer; */
     color: red;
     background-color: red;
     box-shadow: 5px 5px black;
@@ -154,7 +171,11 @@ export function Homepage() {
 
   return (
     <>
-      <Page>
+      <Page
+      variants = {PageMotion}
+      initial = "start"
+      animate = "end"
+      >
         <NavButton>
           <SvgBox
             onClick={clickButton}

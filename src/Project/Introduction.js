@@ -22,25 +22,42 @@ const Body = createGlobalStyle`
 
 `;
 
-const Title = styled.title`
+const Title = styled(motion.title)`
   display: block;
   display: flex;
   justify-content: center;
   font-size: 100px;
-  text-shadow: 6px 5px gray;
+
+  margin-top: 50px;
   margin-bottom: 50px;
   &:hover {
-    cursor: pointer;
     color: red;
+    text-shadow: 6px 5px gray;
   }
 `;
 
-const Page = styled.div`
+const Page = styled(motion.div)`
   position: relative;
   width: 100vw;
   height: 100vh;
   border-top: 2px solid black;
 `;
+
+const PageMotion = {
+  start: {
+    // "background-color": "black",
+    // clipPath:   "circle(0%)",
+    border: "500px solid black",
+    transition: { duration: 1.5, type: "tween" },
+  },
+  end: {
+    // "background-color": "black",
+    // clipPath: "circle(100%)",
+    border: "0px solid black",
+
+    transition: { duration: 1.5, type: "tween" },
+  },
+};
 
 // ---------------------------------------------------- 메뉴 리스트
 const Nav = styled(motion.nav)`
@@ -227,8 +244,10 @@ export function Introduction() {
   return (
     <>
       <Body />
-      <Title>T Y P E S</Title>
-      <Page>
+      <Title variants={PageMotion} initial="start" animate="end">
+        T Y P E S
+      </Title>
+      <Page variants={PageMotion} initial="start" animate="end">
         <Nav
           initial={false}
           animate={isOpen ? "open" : "closed"}
