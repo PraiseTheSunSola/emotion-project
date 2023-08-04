@@ -166,42 +166,59 @@ const MoveTopBottomButtonBox = styled(motion.div)`
   /* background-color: red; */
 `;
 
-const MoveTopBottomButton = styled(motion.button)`
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  transform-origin: center center;
-  border: 1px solid black;
-  background-color: white;
-`;
-
-const Buttons = styled(motion.div)`
-  position: absolute;
-  top: 30%;
-`;
-
 const MovePageTop = styled(motion.button)`
+  position: fixed;
+  bottom: 15%;
+  left: 95%;
   width: 50px;
   height: 50px;
+  font-size: 40px;
+  border: 0px;
+  background-color: white;
+  color: black;
+  opacity: 1;
+  &:hover {
+    cursor: pointer;
+    opacity: 0.5;
+    color: gray;
+  }
 `;
 
 const MovePageBottom = styled(motion.button)`
+  position: fixed;
+  bottom: 5%;
+  left: 95%;
   width: 50px;
   height: 50px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  font-size: 40px;
+  border: 0px;
+  background-color: white;
+  color: black;
+
+  &:hover {
+    cursor: pointer;
+    color: gray;
+  }
 `;
 
 const MoveTop = {
   start: { opacity: 0, scale: 0 },
-  end: { opacity: 1, scale: 1, rotateZ: 0, transition: { type: "spring" } },
-  exit: { opacity: 0, scale: 0, rotateZ: 0 },
+  end: {
+    opacity: 1,
+    scale: 1,
+    rotateZ: 0,
+    transition: { type: "spring", delay: 1.5 },
+  },
 };
 
 const MoveBottom = {
   start: { opacity: 0, scale: 0 },
-  end: { opacity: 1, scale: 1, rotateZ: 0, transition: { type: "spring" } },
-  exit: { opacity: 0, scale: 0, rotateZ: 0 },
+  end: {
+    opacity: 1,
+    scale: 1,
+    rotateZ: 0,
+    transition: { type: "spring", delay: 1.5 },
+  },
 };
 
 // ------------------------------------------- 버튼
@@ -414,39 +431,25 @@ export function Regulation() {
           </H7>
         </ImageBox>
       </Page>
-
-      <MoveTopBottomButtonBox
-      // variants={PageMotion}
-      // initial="start"
-      // animate="end"
+      <MovePageTop
+        variants={MoveTop}
+        initial="start"
+        animate="end"
+        exit="exit"
+        onClick={() => ClickMoveTop()}
       >
-        <MoveTopBottomButton onClick={clickButton}>클릭</MoveTopBottomButton>
-        <AnimatePresence>
-          {show ? (
-            <Buttons>
-              <MovePageTop
-                variants={MoveTop}
-                initial="start"
-                animate="end"
-                exit="exit"
-                onClick={() => ClickMoveTop()}
-              >
-                맨 위
-              </MovePageTop>
+        ▲
+      </MovePageTop>
 
-              <MovePageBottom
-                variants={MoveBottom}
-                initial="start"
-                animate="end"
-                exit="exit"
-                onClick={() => ClickMoveBottom()}
-              >
-                맨 아래
-              </MovePageBottom>
-            </Buttons>
-          ) : null}
-        </AnimatePresence>
-      </MoveTopBottomButtonBox>
+      <MovePageBottom
+        variants={MoveBottom}
+        initial="start"
+        animate="end"
+        exit="exit"
+        onClick={() => ClickMoveBottom()}
+      >
+        ▼
+      </MovePageBottom>
     </>
   );
 }
