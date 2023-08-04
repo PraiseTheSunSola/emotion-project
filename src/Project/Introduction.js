@@ -22,23 +22,14 @@ const Body = createGlobalStyle`
 
 `;
 
-const ModalOnOff = styled(motion.div)`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.3);
-`;
-
 const Title = styled(motion.title)`
-  display: block;
-  display: flex;
-  justify-content: center;
+  position: absolute;
+  left: 35%;
+  display: inline-block;
   font-size: 100px;
-
-  margin-top: 70px;
+  margin-top: 50px;
   margin-bottom: 50px;
+  z-index: 1;
   &:hover {
     color: red;
     text-shadow: 6px 5px gray;
@@ -64,6 +55,61 @@ const PageMotion = {
     border: "0px solid black",
 
     transition: { duration: 1.5, type: "tween" },
+  },
+};
+
+const MovePageTop = styled(motion.button)`
+  position: fixed;
+  bottom: 5%;
+  left: 95%;
+  width: 50px;
+  height: 50px;
+  font-size: 40px;
+  border: 0px;
+  background-color: white;
+  color: black;
+  opacity: 1;
+  &:hover {
+    cursor: pointer;
+    opacity: 0.5;
+    color: gray;
+  }
+`;
+
+const MovePageBottom = styled(motion.button)`
+  position: fixed;
+  bottom: 5%;
+  left: 95%;
+  width: 50px;
+  height: 50px;
+  font-size: 40px;
+  border: 0px;
+  background-color: white;
+  color: black;
+
+  &:hover {
+    cursor: pointer;
+    color: gray;
+  }
+`;
+
+const MoveTop = {
+  start: { opacity: 0, scale: 0 },
+  end: {
+    opacity: 1,
+    scale: 1,
+    rotateZ: 0,
+    transition: { type: "spring", delay: 2 },
+  },
+};
+
+const MoveBottom = {
+  start: { opacity: 0, scale: 0 },
+  end: {
+    opacity: 1,
+    scale: 1,
+    rotateZ: 0,
+    transition: { type: "spring", delay: 2 },
   },
 };
 
@@ -99,7 +145,7 @@ const IconContainer = styled(motion.div)`
 const Ul = styled(motion.ul)`
   /* 목록 스타일 및 애니메이션을 여기에 추가하세요 */
   position: absolute;
-  top: -3%;
+  top: 10%;
   left: 10%;
   display: flex;
   width: 80%;
@@ -142,7 +188,7 @@ const itemVariants = {
 
 const BigBox = styled(motion.div)`
   position: absolute;
-  top: 5%;
+  top: 15%;
   left: 11.5%;
   display: grid;
   grid-template-columns: repeat(3, 580px);
@@ -196,6 +242,17 @@ const Name = styled(motion.h3)`
   word-break: keep-all;
 `;
 
+const ModalOnOff = styled(motion.div)`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(10px);
+  z-index: 1;
+  /* background: rgba(0, 0, 0, 0.3); */
+`;
+
 const Text = styled(motion.p)`
   font-size: 14px;
   color: grey;
@@ -208,10 +265,9 @@ const Modal = styled(motion.div)`
   position: fixed;
   width: 500px;
   height: 700px;
-  top: 50%;
+  top: 55%;
   left: 50%;
   background-color: white;
-  /* border: 5px solid black; */
   transform: translate(-50%, -50%);
   Img {
     width: 100%;
@@ -250,6 +306,17 @@ export function Introduction() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const ClickMoveTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const ClickMoveBottom = () => {
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: "smooth",
+    });
+  };
 
   const CloseModal = () => {
     setIsModalOpen(false);
@@ -339,6 +406,15 @@ export function Introduction() {
           </ModalOnOff>
         )}
       ;
+      <MovePageTop
+        variants={MoveTop}
+        initial="start"
+        animate="end"
+        exit="exit"
+        onClick={() => ClickMoveTop()}
+      >
+        ▲
+      </MovePageTop>
     </>
   );
 }

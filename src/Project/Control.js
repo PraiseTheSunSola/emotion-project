@@ -24,6 +24,7 @@ const Title = styled(motion.title)`
   display: inline-block;
   font-size: 100px;
   margin-top: 55px;
+  margin-left: 80px;
   margin-bottom: 30px;
   &:hover {
     color: red;
@@ -31,48 +32,70 @@ const Title = styled(motion.title)`
   }
 `;
 
-// ---------------------------------------------------- 메뉴 리스트
-const Nav = styled(motion.nav)`
-  /* 네비게이션 스타일을 여기에 추가하세요 */
-  position: absolute;
-  top: 70px;
-  left: 40%;
-  width: 300px;
+const MovePageTop = styled(motion.button)`
+  position: fixed;
+  bottom: 10%;
+  left: 95%;
+  width: 50px;
+  height: 50px;
+  font-size: 40px;
+  border: 0px;
+  background-color: white;
+  color: black;
+  opacity: 1;
+  &:hover {
+    cursor: pointer;
+    opacity: 0.5;
+    color: gray;
+  }
 `;
 
-const Button = styled(motion.button)`
-  /* 버튼 스타일 및 애니메이션을 여기에 추가하세요 */
-  width: 100%;
-  padding: 10px;
-  font-size: 30px;
+const MovePageBottom = styled(motion.button)`
+  position: fixed;
+  bottom: 5%;
+  left: 95%;
+  width: 50px;
+  height: 50px;
+  font-size: 40px;
+  border: 0px;
   background-color: white;
-  box-shadow: 5px 5px;
+  color: black;
 
   &:hover {
     cursor: pointer;
-    background-color: red;
-  }
-  &.active {
-    color: white;
-    background-color: black;
+    color: gray;
   }
 `;
 
-const IconContainer = styled(motion.div)`
-  /* 아이콘 컨테이너 스타일 및 애니메이션을 여기에 추가하세요 */
-  display: inline-block;
-  margin-left: 100px;
-  scale: 1.5;
-`;
+const MoveTop = {
+  start: { opacity: 0, scale: 0 },
+  end: {
+    opacity: 1,
+    scale: 1,
+    rotateZ: 0,
+    transition: { type: "spring", delay: 2 },
+  },
+};
+
+const MoveBottom = {
+  start: { opacity: 0, scale: 0 },
+  end: {
+    opacity: 1,
+    scale: 1,
+    rotateZ: 0,
+    transition: { type: "spring", delay: 2 },
+  },
+};
+
+// ---------------------------------------------------- 메뉴 리스트
 
 const Ul = styled(motion.ul)`
   /* 목록 스타일 및 애니메이션을 여기에 추가하세요 */
-  position: absolute;
-  top: -25%;
-  left: 110%;
+  position: relative;
+  top: -150px;
+  left: 50%;
   display: flex;
-  width: 800px;
-  height: 100%;
+  width: 750px;
   padding: 0;
 `;
 
@@ -84,6 +107,7 @@ const Item = styled(motion.button)`
   background-color: white;
   margin-left: 10px;
   box-shadow: 5px 5px;
+  padding: 10px;
 
   &:hover {
     cursor: pointer;
@@ -98,26 +122,27 @@ const Item = styled(motion.button)`
 
 const ItemList = styled(motion.div)`
   position: absolute;
-  left: 110%;
+  top: 100px;
   display: flex;
-  margin-top: 10px;
-  width: 800px;
+  justify-content: center;
+  width: 810px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 `;
 
 const ButtonBox = styled(motion.div)`
+  width: 100%;
   display: inline-block;
   margin-left: 10px;
-  box-shadow: 5px 5px;
 `;
 
 const ListButton = styled.button`
-  width: 100%;
+  width: 200px;
   height: 50px;
-  font-size: 20px;
+  padding: 10px;
+  font-size: 15px;
   background-color: white;
-
+  box-shadow: 5px 5px gray;
   &:hover {
     cursor: pointer;
     background-color: red;
@@ -138,46 +163,28 @@ const itemVariants = {
 };
 
 const UlMotion = {
-  open: {
-    clipPath: "inset(0% 0% 0% 0% round 0px)",
-    transition: {
-      type: "spring",
-      bounce: 0,
-      duration: 0.7,
-      delayChildren: 0.3,
-      staggerChildren: 0.05,
-    },
+  start: {
+    opacity: 0,
+    y: -200,
+    transition: { type: "spring", duration: 1.5, delay: 1.8 },
   },
-  closed: {
-    clipPath: "inset(10% 50% 90% 50% round 10px)",
-    transition: {
-      type: "spring",
-      bounce: 0,
-      duration: 0.3,
-    },
+  end: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "spring", duration: 1.5, delay: 1.8 },
   },
 };
 
 const ItemListMotion = {
-  open: {
-    clipPath: "inset(0% 0% 0% 0% round 0px)",
-    transition: {
-      type: "spring",
-      bounce: 0,
-      delay: 1,
-      duration: 0.7,
-      delayChildren: 0.3,
-      staggerChildren: 0.05,
-    },
+  start: {
+    opacity: 0,
+    y: -200,
+    transition: { type: "spring", duration: 1.5, delay: 1.8 },
   },
-
-  closed: {
-    clipPath: "inset(10% 50% 90% 50% round 10px)",
-    transition: {
-      type: "spring",
-      bounce: 0,
-      duration: 0.3,
-    },
+  end: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "spring", duration: 1.5, delay: 1.8 },
   },
 };
 
@@ -186,9 +193,9 @@ const ItemListMotion = {
 const Page = styled(motion.section)`
   position: relative;
   width: 100vw;
-  height: 100vh;
-  border-top: 2px solid black;
-  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const PageMotion = {
@@ -211,37 +218,45 @@ const PageMotion = {
 
 const Modal = styled(motion.div)`
   position: absolute;
+  top: -10px;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  width: 100%;
-  height: 100%;
+  grid-template-columns: repeat(2, 600px);
+  width: 1200px;
+  height: 608px;
+  border: 4px solid black;
+  overflow: hidden;
 `;
 
 const Img = styled.img`
+  /* position: absolute; */
   width: 100%;
   height: 100%;
 `;
 
 const P = styled.p`
-  font-size: 50px;
+  /* transform: translate(100%, 0%); */
+  display: inline-block;
+  font-size: 25px;
+  color: gray;
   word-break: keep-all;
+  padding: 140px;
 `;
 
 const BoxMotion = {
   start: {
-    y: -window.innerWidth,
+    x: -window.innerWidth,
     opacity: 0,
     transition: { duration: 2, type: "spring" },
   },
 
   end: {
-    y: 0,
+    x: 0,
     opacity: 1,
     transition: { duration: 2, type: "spring" },
   },
 
   exit: {
-    y: -window.innerWidth,
+    x: -window.innerWidth,
     opacity: 0,
     transition: { duration: 1, type: "tween" },
   },
@@ -312,49 +327,19 @@ export function Control() {
         C O N T R O L
       </Title>
 
-      <Nav
-        initial={false}
-        animate={isOpen ? "open" : "closed"}
-        className="menu"
-      >
-        <Button
-          whileTap={{ scale: 0.97 }}
-          onClick={() => setIsOpen(!isOpen)}
-
-          // className={active && isOpen ? "active" : ""}
-        >
-          감정관리
-          <IconContainer
-            variants={{
-              open: { rotate: -90 },
-              closed: { rotate: 0 },
-            }}
-            transition={{ duration: 0.2 }}
-            style={{ originY: 0.55 }}
+      <Ul variants={UlMotion} initial="start" animate="end">
+        {EmotionControl.map((B, i) => (
+          <Item
+            key={B.id}
+            onClick={() => ItemClick(i)}
+            className={active && i === selectedButton ? "active" : ""}
           >
-            <svg width="15" height="15" viewBox="0 0 20 20">
-              <path d="M0 7 L 20 7 L 10 16" />
-            </svg>
-          </IconContainer>
-        </Button>
-        <Ul
-          variants={UlMotion}
-          style={{ pointerEvents: isOpen ? "auto" : "none" }}
-        >
-          {EmotionControl.map((B, i) => (
-            <Item
-              key={B.id}
-              variants={itemVariants}
-              onClick={() => ItemClick(i)}
-              className={active && i === selectedButton ? "active" : ""}
-            >
-              {B.title}
-            </Item>
-          ))}
-        </Ul>
+            {B.title}
+          </Item>
+        ))}
 
         {selectedButton !== null && (
-          <ItemList variants={ItemListMotion}>
+          <ItemList>
             {EmotionControl[selectedButton].list.map((C, i) => (
               <ButtonBox key={C.id}>
                 <ListButton
@@ -367,7 +352,7 @@ export function Control() {
             ))}
           </ItemList>
         )}
-      </Nav>
+      </Ul>
 
       <Page variants={PageMotion} initial="start" animate="end">
         <AnimatePresence>

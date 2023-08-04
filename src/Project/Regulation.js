@@ -16,11 +16,10 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 const Title = styled(motion.title)`
+  position: absolute;
+  left: 40%;
   display: inline-block;
-  display: flex;
-  justify-content: center;
   font-size: 100px;
-
   margin-top: 50px;
   margin-bottom: 50px;
   &:hover {
@@ -168,7 +167,7 @@ const MoveTopBottomButtonBox = styled(motion.div)`
 
 const MovePageTop = styled(motion.button)`
   position: fixed;
-  bottom: 15%;
+  bottom: 5%;
   left: 95%;
   width: 50px;
   height: 50px;
@@ -441,7 +440,7 @@ export function Regulation() {
         ▲
       </MovePageTop>
 
-      <MovePageBottom
+      {/* <MovePageBottom
         variants={MoveBottom}
         initial="start"
         animate="end"
@@ -449,7 +448,7 @@ export function Regulation() {
         onClick={() => ClickMoveBottom()}
       >
         ▼
-      </MovePageBottom>
+      </MovePageBottom> */}
     </>
   );
 }
