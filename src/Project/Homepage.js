@@ -9,25 +9,23 @@ const Page = styled(motion.div)`
   display: flex;
   align-items: center;
   justify-content: center;
- 
 `;
 
 const PageMotion = {
-
   start: {
     // "background-color": "black",
     // clipPath:   "circle(0%)",
-    "border": "500px solid black",
-    transition: { duration: 1.5, type: "tween"}
+    border: "500px solid black",
+    transition: { duration: 1.5, type: "tween" },
   },
   end: {
     // "background-color": "black",
     // clipPath: "circle(100%)",
-    "border": "0px solid black",
-    
-    transition: { duration: 1.5, type: "tween"}
+    border: "0px solid black",
+
+    transition: { duration: 1.5, type: "tween" },
   },
-}
+};
 
 const SvgBox = styled(motion.svg)`
   display: inline-block;
@@ -151,8 +149,15 @@ const ControlButton = styled(motion.button)`
 `;
 
 const StyledLink = styled(Link)`
+  font-size: 45px;
   color: black;
+  padding: 20px;
+  border: 2px solid black;
   text-decoration: none;
+  &:hover {
+    background-color: red;
+    box-shadow: 5px 5px black;
+  }
 `;
 
 const inout = {
@@ -171,11 +176,7 @@ export function Homepage() {
 
   return (
     <>
-      <Page
-      variants = {PageMotion}
-      initial = "start"
-      animate = "end"
-      >
+      <Page variants={PageMotion} initial="start" animate="end">
         <NavButton>
           <SvgBox
             onClick={clickButton}
@@ -227,33 +228,17 @@ export function Homepage() {
           </SvgBox>
           <AnimatePresence>
             {show ? (
-              <Buttons>
-                <IntroButton
-                  variants={inout}
-                  initial="start"
-                  animate="end"
-                  exit="exit"
-                >
-                  <StyledLink to="/Regulation">INTRO</StyledLink>
-                </IntroButton>
+              <Buttons
+                variants={inout}
+                initial="start"
+                animate="end"
+                exit="exit"
+              >
+                <StyledLink to="/Regulation">INTRO</StyledLink>
 
-                <TypesButton
-                  variants={inout}
-                  initial="start"
-                  animate="end"
-                  exit="exit"
-                >
-                  <StyledLink to="/Introduction">TYPES</StyledLink>
-                </TypesButton>
+                <StyledLink to="/Introduction">TYPES</StyledLink>
 
-                <ControlButton
-                  variants={inout}
-                  initial="start"
-                  animate="end"
-                  exit="exit"
-                >
-                  <StyledLink to="/Control">CONTROL</StyledLink>
-                </ControlButton>
+                <StyledLink to="/Control">CONTROL</StyledLink>
               </Buttons>
             ) : null}
           </AnimatePresence>

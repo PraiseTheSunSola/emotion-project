@@ -18,14 +18,12 @@ const Body = createGlobalStyle`
     scrollbar-width: none;
   }
 
-
 `;
 
 const Title = styled(motion.title)`
   display: inline-block;
   font-size: 100px;
-
-  margin-top: 50px;
+  margin-top: 55px;
   margin-bottom: 30px;
   &:hover {
     color: red;
@@ -273,6 +271,10 @@ export function Control() {
 
   const [active, setActive] = useState(false);
   // const [renderCount, setRenderCount] = useState(0);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     console.log(active);

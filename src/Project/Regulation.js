@@ -13,6 +13,7 @@ import {
   useTransform,
 } from "framer-motion";
 import { useState } from "react";
+import { useEffect } from "react";
 
 const Title = styled(motion.title)`
   display: inline-block;
@@ -207,6 +208,10 @@ const MoveBottom = {
 
 export function Regulation() {
   const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   function clickButton() {
     setShow((appear) => !appear);
@@ -411,9 +416,9 @@ export function Regulation() {
       </Page>
 
       <MoveTopBottomButtonBox
-        variants={PageMotion}
-        initial="start"
-        animate="end"
+      // variants={PageMotion}
+      // initial="start"
+      // animate="end"
       >
         <MoveTopBottomButton onClick={clickButton}>클릭</MoveTopBottomButton>
         <AnimatePresence>
