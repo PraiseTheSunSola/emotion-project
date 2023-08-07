@@ -246,13 +246,13 @@ const BoxMotion = {
   start: {
     x: -window.innerWidth,
     opacity: 0,
-    transition: { duration: 2, type: "spring" },
+    transition: { duration: 1.5, type: "spring" },
   },
 
   end: {
     x: 0,
     opacity: 1,
-    transition: { duration: 2, type: "spring" },
+    transition: { duration: 1.5, type: "spring" },
   },
 
   exit: {
@@ -283,19 +283,21 @@ export function Control() {
   const [selectedButton, setSelectedButton] = useState(null);
   const [listButton, setListButton] = useState(null);
   const [key, setKey] = useState(0);
-
   const [active, setActive] = useState(false);
-  // const [renderCount, setRenderCount] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  useEffect(() => {
-    console.log(active);
-  }, [selectedButton]);
+  // useEffect(() => {
+  //   console.log(active);
+  // }, [selectedButton]);
 
   const ItemClick = (i) => {
+    if (i === selectedButton) {
+      return;
+    }
     setSelectedButton(i); // 선택한 버튼 인덱스를 설정
     setListButton(0);
     setActive(true);
@@ -303,9 +305,14 @@ export function Control() {
 
   const ListClick = (i) => {
     // 이미 선택된 ListButton을 눌렀을 때, 아무 작업도 하지 않음
+    if (isAnimating) {
+      return;
+    }
     if (i === listButton) {
       return;
     }
+    console.log(isAnimating);
+    setIsAnimating(true);
     setActive(true);
     setListButton(i);
     increaseKey();
@@ -365,6 +372,12 @@ export function Control() {
                 animate="end"
                 exit="exit"
                 key={key}
+                onAnimationComplete={(type) => {
+                  if (type === "end") {
+                    console.log("end complete");
+                    setIsAnimating(false);
+                  }
+                }} // 애니메이션 완료 시 클릭 가능
               >
                 <Img
                   src={EmotionControl[selectedButton].list[listButton].image}

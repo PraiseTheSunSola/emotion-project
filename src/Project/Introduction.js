@@ -174,13 +174,13 @@ const Item = styled(motion.button)`
 const itemVariants = {
   start: {
     opacity: 0,
-    y: -200,
-    transition: { type: "spring", duration: 1.5, delay: 1.8 },
+    y: 0,
+    transition: { type: "tween", duration: 1.5, delay: 1.8 },
   },
   end: {
     opacity: 1,
     y: 0,
-    transition: { type: "spring", duration: 1.5, delay: 1.8 },
+    transition: { type: "tween", duration: 1.5, delay: 1.8 },
   },
 };
 
@@ -213,13 +213,13 @@ const BoxMotion = {
   start: {
     y: window.innerWidth,
     opacity: 0,
-    transition: { duration: 1, type: "tween" },
+    transition: { duration: 1.2, type: "tween" },
   },
 
   end: {
     y: 1,
     opacity: 1,
-    transition: { duration: 1, type: "tween" },
+    transition: { duration: 1.2, type: "tween" },
   },
 
   exit: {
@@ -248,7 +248,8 @@ const ModalOnOff = styled(motion.div)`
   left: 0;
   width: 100vw;
   height: 100vh;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(5px);
+  background: rgba(0, 0, 0, 0.1);
   z-index: 1;
   /* background: rgba(0, 0, 0, 0.3); */
 `;
@@ -302,6 +303,19 @@ export function Introduction() {
   const [active, setActive] = useState(false);
   const [key, setKey] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  const ItemClick = (i) => {
+    if (isAnimating) return; // 애니메이션 중에는 클릭 불가
+    if (i === selectedButton) {
+      return;
+    }
+    console.log(isAnimating);
+    setIsAnimating(true); // 애니메이션 시작
+    setSelectedButton(i); // 선택한 버튼 인덱스를 설정
+    setActive(true);
+    increaseKey();
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -320,15 +334,6 @@ export function Introduction() {
 
   const CloseModal = () => {
     setIsModalOpen(false);
-  };
-
-  const ItemClick = (i) => {
-    if (i === selectedButton) {
-      return;
-    }
-    setSelectedButton(i); // 선택한 버튼 인덱스를 설정
-    setActive(true);
-    increaseKey();
   };
 
   function increaseKey() {
@@ -374,6 +379,13 @@ export function Introduction() {
             animate="end"
             exit="exit"
             key={key}
+            id="bigbox"
+            onAnimationComplete={(type) => {
+              if (type === "end") {
+                console.log("end complete");
+                setIsAnimating(false);
+              }
+            }} // 애니메이션 완료 시 클릭 가능
           >
             {selectedButton !== null &&
               // console.log(EmotionKind[selectedButton])
