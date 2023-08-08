@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import LifeQuotes from "./LifeQuotes";
+import { useEffect } from "react";
 
 const Page = styled(motion.div)`
   width: 100vw;
@@ -9,6 +11,31 @@ const Page = styled(motion.div)`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+const Quotes = styled(motion.div)`
+  position: absolute;
+  top: 10%;
+  left: 25%;
+  display: inline-block;
+`;
+
+const QuotesText = styled(motion.div)`
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.4);
+  word-break: keep-all;
+`;
+
+const QuotesAnimation = {
+  start: { opacity: 0, transition: { duration: 2, delay: 2, type: "tween" } },
+  end: { opacity: 1, transition: { duration: 2, delay: 2, type: "tween" } },
+};
+
+const Quotes2 = styled(motion.div)`
+  position: absolute;
+  top: 100px;
+  left: 0;
+  display: inline-block;
 `;
 
 const PageMotion = {
@@ -170,6 +197,13 @@ const inout = {
 
 export function Homepage() {
   const [show, setShow] = useState(false);
+  const [randomQuote, setRandomQuote] = useState(null);
+
+  useEffect(() => {
+    const randomIndex = Math.floor(Math.random() * LifeQuotes.length);
+    setRandomQuote(LifeQuotes[randomIndex]);
+  }, []);
+
   function clickButton() {
     setShow((appear) => !appear);
   }
@@ -177,6 +211,14 @@ export function Homepage() {
   return (
     <>
       <Page variants={PageMotion} initial="start" animate="end">
+        <Quotes variants={QuotesAnimation} initial="start" animate="end">
+          {randomQuote ? (
+            <QuotesText>{randomQuote.text}</QuotesText>
+          ) : (
+            <div>No quote selected</div>
+          )}
+        </Quotes>
+
         <NavButton>
           <SvgBox
             onClick={clickButton}

@@ -299,7 +299,7 @@ const DeleteBtn = styled.button`
 export function Introduction() {
   const [selectedButton, setSelectedButton] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null); // 이미지 클릭
-  const [emotionDB, setEmotionDB] = useState(EmotionKind);
+  // const [emotionDB, setEmotionDB] = useState(EmotionKind);
   const [active, setActive] = useState(false);
   const [key, setKey] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
