@@ -4,7 +4,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import LifeQuotes from "./LifeQuotes";
 import { useEffect } from "react";
-
+import { ThemeContext } from "../App";
+import { useContext } from "react";
 const Page = styled(motion.div)`
   width: 100vw;
   height: 100vh;
@@ -22,7 +23,7 @@ const Quotes = styled(motion.div)`
 
 const QuotesText = styled(motion.div)`
   font-size: 20px;
-  color: rgba(0, 0, 0, 0.4);
+  color: ${(props) => props.theme.textColor};
   word-break: keep-all;
 `;
 
@@ -177,9 +178,9 @@ const ControlButton = styled(motion.button)`
 
 const StyledLink = styled(Link)`
   font-size: 45px;
-  color: black;
+  color: ${(props) => props.theme.textColor};
   padding: 20px;
-  border: 2px solid black;
+  border: 2px solid ${(props) => props.theme.textColor};
   text-decoration: none;
   &:hover {
     background-color: red;
@@ -198,6 +199,7 @@ const inout = {
 export function Homepage() {
   const [show, setShow] = useState(false);
   const [randomQuote, setRandomQuote] = useState(null);
+  const theme = useContext(ThemeContext);
 
   useEffect(() => {
     const randomIndex = Math.floor(Math.random() * LifeQuotes.length);
@@ -231,6 +233,7 @@ export function Homepage() {
               d="M 50 100 V 400 H 180 V 350 H 100 V 250 H 160 V 200 H 100 V 100 H 180"
               variants={draw}
               custom={1}
+              stroke={theme.textColor}
             />
 
             {/* M */}
@@ -238,6 +241,7 @@ export function Homepage() {
               d="M 250 100 V 400 H 340 V 200 H 440 V 400 H 530 V 100"
               variants={draw}
               custom={1.5}
+              stroke={theme.textColor}
             />
 
             {/* O */}
@@ -252,6 +256,7 @@ export function Homepage() {
               d="M 60 500 H 140 V 450 H 100 V 100 H 80 V 450 H 40 V 500"
               variants={draw}
               custom={2.5}
+              stroke={theme.textColor}
             />
 
             {/* I */}
@@ -259,6 +264,7 @@ export function Homepage() {
               d="M 230 500 H 310 V 450 H 270 V 100 H 250 V 450 H 210 V 500"
               variants={draw}
               custom={3}
+              stroke={theme.textColor}
             />
 
             {/* N */}
@@ -266,6 +272,7 @@ export function Homepage() {
               d="M 370 100 V 400 H 460 V 200 L 560 400 H 650 V 100"
               variants={draw}
               custom={3.5}
+              stroke={theme.textColor}
             />
           </SvgBox>
           <AnimatePresence>

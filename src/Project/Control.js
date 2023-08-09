@@ -27,7 +27,7 @@ const Title = styled(motion.title)`
   margin-left: 80px;
   margin-bottom: 30px;
   &:hover {
-    color: red;
+    color: ${(props) => props.theme.hoverColor};
     text-shadow: 6px 5px gray;
   }
 `;
@@ -104,19 +104,22 @@ const Item = styled(motion.button)`
   width: 100%;
   font-size: 20px;
   word-break: keep-all;
-  background-color: white;
-  margin-left: 10px;
-  box-shadow: 5px 5px;
+  color: ${(props) => props.theme.textColor};
+  background-color: ${(props) => props.theme.backgroundColor};
+  border: 2px solid ${(props) => props.theme.textColor};
   padding: 10px;
+  margin-left: 10px;
 
   &:hover {
     cursor: pointer;
-    background-color: red;
+    background-color: ${(props) => props.theme.hoverColor};
   }
 
   &.active {
-    color: white;
-    background-color: black;
+    color: ${(props) => props.theme.activeColor};
+    box-shadow: none;
+    border: 5px inset ${(props) => props.theme.textColor};
+    background-color: ${(props) => props.theme.backgroundColor};
   }
 `;
 
@@ -141,15 +144,19 @@ const ListButton = styled.button`
   height: 50px;
   padding: 10px;
   font-size: 15px;
-  background-color: white;
+  color: ${(props) => props.theme.textColor};
+  border: 2px solid ${(props) => props.theme.textColor};
+  background-color: ${(props) => props.theme.backgroundColor};
   box-shadow: 5px 5px gray;
   &:hover {
     cursor: pointer;
-    background-color: red;
+    background-color: ${(props) => props.theme.hoverColor};
   }
   &.active {
-    color: white;
-    background-color: black;
+    color: ${(props) => props.theme.activeColor};
+    background-color: ${(props) => props.theme.backgroundColor};
+    border: 5px inset ${(props) => props.theme.textColor};
+    box-shadow: none;
   }
 `;
 
@@ -223,7 +230,7 @@ const Modal = styled(motion.div)`
   grid-template-columns: repeat(2, 600px);
   width: 1200px;
   height: 608px;
-  border: 4px solid black;
+  border: 4px solid ${(props) => props.theme.textColor};
   overflow: hidden;
 `;
 

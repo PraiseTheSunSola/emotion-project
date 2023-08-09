@@ -7,12 +7,12 @@ const Home = styled.div`
   width: 100%;
   /* height: 50px; */
   z-index: 2;
-  background-color: white;
+  background-color: ${(props) => props.theme.backgroundColor};
 `;
 
 const Page = styled(NavLink)`
   margin: 30px;
-  color: black;
+  color: ${(props) => props.theme.textColor};
   text-decoration: none;
   font-size: 20px;
   font-weight: 600;
@@ -20,7 +20,7 @@ const Page = styled(NavLink)`
     text-shadow: 1px 17px gray;
   }
   &.active {
-    color: red;
+    color: ${(props) => props.theme.activeColor};
   }
 `;
 

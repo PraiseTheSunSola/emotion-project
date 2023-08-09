@@ -66,8 +66,8 @@ const MovePageTop = styled(motion.button)`
   height: 50px;
   font-size: 40px;
   border: 0px;
-  background-color: white;
-  color: black;
+  background-color: ${(props) => props.theme.backgroundColor};
+  color: ${(props) => props.theme.textColor};
   opacity: 1;
   &:hover {
     cursor: pointer;
@@ -157,8 +157,11 @@ const Item = styled(motion.button)`
   width: 100%;
   font-size: 20px;
   margin-left: 30px;
-  background-color: white;
-  box-shadow: 5px 5px;
+  padding: 5px;
+  color: ${(props) => props.theme.textColor};
+  background-color: ${(props) => props.theme.backgroundColor};
+  border: 2px solid ${(props) => props.theme.textColor};
+  box-shadow: 5px 5px ${(props) => props.theme.textColor};
 
   &:hover {
     cursor: pointer;
@@ -166,8 +169,10 @@ const Item = styled(motion.button)`
   }
 
   &.active {
-    color: white;
-    background-color: black;
+    color: red;
+    box-shadow: none;
+    border: 5px inset ${(props) => props.theme.textColor};
+    background-color: ${(props) => props.theme.backgroundColor};
   }
 `;
 

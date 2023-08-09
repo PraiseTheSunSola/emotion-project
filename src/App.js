@@ -1,5 +1,12 @@
 import { createGlobalStyle } from "styled-components";
+import { ThemeProvider } from "styled-components";
+import { createContext, useContext } from "react"; // ThemeContext 관련 추가
 import { Emotion } from "./Project/Emotion";
+import { useState } from "react";
+import { lightTheme, darkTheme, GlobalStyle } from "./Project/Themes";
+import ToggleButton from "./Project/ToggleButton";
+
+export const ThemeContext = createContext();
 
 const Body = createGlobalStyle`
 @font-face {
@@ -34,6 +41,7 @@ const Body = createGlobalStyle`
 
 body {  
   overflow-x: hidden;
+  
 * {
   font-family: "NEXON Lv1 Gothic OTF";
   box-sizing: border-box;
@@ -42,10 +50,26 @@ body {
 `;
 
 function App() {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  const toggleTheme = () => {
+    setIsDarkMode((prevMode) => !prevMode);
+    console.log(isDarkMode);
+  };
+
   return (
     <>
-      <Body />
-      <Emotion />
+      <ThemeContext.Provider value={isDarkMode ? darkTheme : lightTheme}>
+        <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+          <GlobalStyle />
+          <div>
+            <ToggleButton onClick={toggleTheme}>테마 변경</ToggleButton>
+          </div>
+          <Emotion />
+        </ThemeProvider>
+
+        <Body />
+      </ThemeContext.Provider>
     </>
   );
 }

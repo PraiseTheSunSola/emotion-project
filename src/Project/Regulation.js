@@ -92,6 +92,7 @@ const H1 = styled(H)`
   //왼쪽
   top: 270px;
   left: 200px;
+  color: ${(props) => props.theme.textColor};
 `;
 
 const H2 = styled(H)`
@@ -101,7 +102,7 @@ const H2 = styled(H)`
   height: 200px;
   top: 200px;
   right: 300px;
-  color: white;
+  color: ${(props) => props.theme.textColor};
 `;
 
 const H3 = styled(H)`
@@ -111,7 +112,7 @@ const H3 = styled(H)`
   height: 200px;
   top: 270px;
   left: 200px;
-  color: white;
+  color: ${(props) => props.theme.textColor};
 `;
 
 const H4 = styled(H)`
@@ -121,7 +122,7 @@ const H4 = styled(H)`
   height: 200px;
   top: 200px;
   right: 300px;
-  color: white;
+  color: ${(props) => props.theme.textColor};
 `;
 
 const H5 = styled(H)`
@@ -131,7 +132,7 @@ const H5 = styled(H)`
   /* height: 200px; */
   top: 270px;
   left: 200px;
-  color: white;
+  color: ${(props) => props.theme.textColor};
 `;
 
 const H6 = styled(H)`
@@ -141,7 +142,7 @@ const H6 = styled(H)`
   height: 200px;
   top: 200px;
   right: 300px;
-  color: white;
+  color: ${(props) => props.theme.textColor};
 `;
 
 const H7 = styled(H)`
@@ -150,7 +151,7 @@ const H7 = styled(H)`
   height: 200px;
   top: 270px;
   left: 200px;
-  color: white;
+  color: ${(props) => props.theme.textColor};
 `;
 
 // ------------------------------------------- 버튼
@@ -173,8 +174,8 @@ const MovePageTop = styled(motion.button)`
   height: 50px;
   font-size: 40px;
   border: 0px;
-  background-color: white;
-  color: black;
+  background-color: ${(props) => props.theme.backgroundColor};
+  color: ${(props) => props.theme.textColor};
   opacity: 1;
   &:hover {
     cursor: pointer;
@@ -284,44 +285,44 @@ export function Regulation() {
   );
 
   // 텍스트 색상
-  const color1 = useTransform(
-    scrollYProgress,
-    [0, 0.02, 0.09],
-    ["black", "black", "black"]
-  );
-  const color2 = useTransform(
-    scrollYProgress,
-    [0.15, 0.2, 0.29],
-    ["black", "black", "black"]
-  );
-  const color3 = useTransform(
-    scrollYProgress,
-    [0.29, 0.31, 0.33, 0.38, 0.45],
-    ["black", "black", "black", "black", "black"]
-  );
-  const color4 = useTransform(
-    scrollYProgress,
-    [0.45, 0.46, 0.52, 0.6],
-    ["black", "black", "black", "black"]
-  );
+  // const color1 = useTransform(
+  //   scrollYProgress,
+  //   [0, 0.02, 0.09],
+  //   ["black", "black", "black"]
+  // );
+  // const color2 = useTransform(
+  //   scrollYProgress,
+  //   [0.15, 0.2, 0.29],
+  //   ["black", "black", "black"]
+  // );
+  // const color3 = useTransform(
+  //   scrollYProgress,
+  //   [0.29, 0.31, 0.33, 0.38, 0.45],
+  //   ["black", "black", "black", "black", "black"]
+  // );
+  // const color4 = useTransform(
+  //   scrollYProgress,
+  //   [0.45, 0.46, 0.52, 0.6],
+  //   ["black", "black", "black", "black"]
+  // );
 
-  const color5 = useTransform(
-    scrollYProgress,
-    [0.6, 0.61, 0.63, 0.69, 0.75],
-    ["black", "black", "black", "black", "black"]
-  );
+  // const color5 = useTransform(
+  //   scrollYProgress,
+  //   [0.6, 0.61, 0.63, 0.69, 0.75],
+  //   ["black", "black", "black", "black", "black"]
+  // );
 
-  const color6 = useTransform(
-    scrollYProgress,
-    [0.75, 0.76, 0.84, 0.89],
-    ["black", "black", "black", "black"]
-  );
+  // const color6 = useTransform(
+  //   scrollYProgress,
+  //   [0.75, 0.76, 0.84, 0.89],
+  //   ["black", "black", "black", "black"]
+  // );
 
-  const color7 = useTransform(
-    scrollYProgress,
-    [0.89, 0.9, 0.98, 1.5],
-    ["black", "black", "black", "black"]
-  );
+  // const color7 = useTransform(
+  //   scrollYProgress,
+  //   [0.89, 0.9, 0.98, 1.5],
+  //   ["black", "black", "black", "black"]
+  // );
 
   const scrollX = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
@@ -342,7 +343,7 @@ export function Regulation() {
             }}
           />
 
-          <H1 style={{ color: color1, opacity: scrollOpacity1 }}>
+          <H1 style={{ opacity: scrollOpacity1 }}>
             수많은 감정들은 <br />
             우리와 함께합니다.
           </H1>
@@ -356,7 +357,7 @@ export function Regulation() {
             }}
           />
 
-          <H2 style={{ color: color2, opacity: scrollOpacity2 }}>
+          <H2 style={{ opacity: scrollOpacity2 }}>
             남에게 들키지 않기 위해 항상 노력하죠.
           </H2>
 
@@ -369,7 +370,7 @@ export function Regulation() {
             }}
           />
 
-          <H3 style={{ color: color3, opacity: scrollOpacity3 }}>
+          <H3 style={{ opacity: scrollOpacity3 }}>
             그래도 감정의 소용돌이에 휘말리는건 어쩔수 없습니다.
           </H3>
 
@@ -382,7 +383,7 @@ export function Regulation() {
             }}
           />
 
-          <H4 style={{ color: color4, opacity: scrollOpacity4 }}>
+          <H4 style={{ opacity: scrollOpacity4 }}>
             억지로 지우려고 해도 쉽게 사라지지 않고,
           </H4>
 
@@ -395,7 +396,7 @@ export function Regulation() {
             }}
           />
 
-          <H5 style={{ color: color5, opacity: scrollOpacity5 }}>
+          <H5 style={{ opacity: scrollOpacity5 }}>
             휘몰아치는 파도와 같이 <br />
             몰아치는 녀석을
           </H5>
@@ -409,7 +410,7 @@ export function Regulation() {
             }}
           />
 
-          <H6 style={{ color: color6, opacity: scrollOpacity6 }}>
+          <H6 style={{ opacity: scrollOpacity6 }}>
             받아들이고 <br />
             관리하여 <br />
             <br />내 것으로 <br />
@@ -423,7 +424,7 @@ export function Regulation() {
               opacity: scrollOpacity7,
             }}
           />
-          <H7 style={{ color: color7, opacity: scrollOpacity7 }}>
+          <H7 style={{ opacity: scrollOpacity7 }}>
             그렇지 않으면 <br />
             감정에 지배된 <br />
             동물이 될 테니까요.
