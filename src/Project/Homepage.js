@@ -4,8 +4,10 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import LifeQuotes from "./LifeQuotes";
 import { useEffect } from "react";
-import { ThemeContext } from "../App";
 import { useContext } from "react";
+import { ThemeContext } from "../App";
+import { lightTheme, darkTheme } from "./Themes";
+
 const Page = styled(motion.div)`
   width: 100vw;
   height: 100vh;
@@ -32,34 +34,11 @@ const QuotesAnimation = {
   end: { opacity: 1, transition: { duration: 2, delay: 2, type: "tween" } },
 };
 
-const Quotes2 = styled(motion.div)`
-  position: absolute;
-  top: 100px;
-  left: 0;
-  display: inline-block;
-`;
-
-const PageMotion = {
-  start: {
-    // "background-color": "black",
-    // clipPath:   "circle(0%)",
-    border: "500px solid black",
-    transition: { duration: 1.5, type: "tween" },
-  },
-  end: {
-    // "background-color": "black",
-    // clipPath: "circle(100%)",
-    border: "0px solid black",
-
-    transition: { duration: 1.5, type: "tween" },
-  },
-};
-
 const SvgBox = styled(motion.svg)`
   display: inline-block;
   width: 800px;
   height: 700px;
-  stroke: black;
+  stroke: ${(props) => props.theme.textColor};
   stroke-width: 10px;
   stroke-linejoin: round;
   stroke-linecap: round;
@@ -72,35 +51,35 @@ const SvgBox = styled(motion.svg)`
 
 const E = styled(motion.path)`
   &:hover {
-    stroke: red;
+    stroke: ${(props) => props.theme.hoverColor};
   }
 `;
 
 const M = styled(motion.path)`
   &:hover {
-    stroke: red;
+    stroke: ${(props) => props.theme.hoverColor};
   }
 `;
 
 const O = styled(motion.path)`
-  stroke: red;
+  stroke: ${(props) => props.theme.activeColor};
 `;
 
 const T = styled(motion.path)`
   &:hover {
-    stroke: red;
+    stroke: ${(props) => props.theme.hoverColor};
   }
 `;
 
 const I = styled(motion.path)`
   &:hover {
-    stroke: red;
+    stroke: ${(props) => props.theme.hoverColor};
   }
 `;
 
 const N = styled(motion.path)`
   &:hover {
-    stroke: red;
+    stroke: ${(props) => props.theme.hoverColor};
   }
 `;
 
@@ -134,48 +113,6 @@ const Buttons = styled(motion.div)`
   justify-content: space-evenly;
 `;
 
-const IntroButton = styled(motion.button)`
-  width: 170px;
-  height: 100px;
-  font-size: 45px;
-  background-color: white;
-  box-shadow: 5px 5px;
-  &:hover {
-    /* cursor: pointer; */
-    color: white;
-    background-color: red;
-    box-shadow: 5px 5px black;
-  }
-`;
-
-const TypesButton = styled(motion.button)`
-  width: 170px;
-  height: 100px;
-  font-size: 45px;
-  background-color: white;
-  box-shadow: 5px 5px;
-  &:hover {
-    /* cursor: pointer; */
-    color: red;
-    background-color: red;
-    box-shadow: 5px 5px black;
-  }
-`;
-
-const ControlButton = styled(motion.button)`
-  width: 170px;
-  height: 100px;
-  font-size: 30px;
-  background-color: white;
-  box-shadow: 5px 5px;
-  &:hover {
-    /* cursor: pointer; */
-    color: red;
-    background-color: red;
-    box-shadow: 5px 5px black;
-  }
-`;
-
 const StyledLink = styled(Link)`
   font-size: 45px;
   color: ${(props) => props.theme.textColor};
@@ -183,7 +120,7 @@ const StyledLink = styled(Link)`
   border: 2px solid ${(props) => props.theme.textColor};
   text-decoration: none;
   &:hover {
-    background-color: red;
+    background-color: ${(props) => props.theme.hoverColor};
     box-shadow: 5px 5px black;
   }
 `;
@@ -196,19 +133,55 @@ const inout = {
 
 // ------------------------------------------- 버튼
 
+export const PageMotionFunc = (theme) => {
+  return {
+    start: {
+      border: `500px solid ${theme.textColor}`,
+      transition: { duration: 1.5, type: "tween" },
+    },
+    end: {
+      border: `0px solid ${theme.textColor}`,
+      transition: { duration: 1.5, type: "tween" },
+    },
+  };
+};
+
 export function Homepage() {
   const [show, setShow] = useState(false);
   const [randomQuote, setRandomQuote] = useState(null);
-  const theme = useContext(ThemeContext);
+  const { isDarkTheme } = useContext(ThemeContext);
+  const [theme, setTheme] = useState(darkTheme);
+  // variant 객체를 컴포넌트 밖에 선언하고 컴포넌트에서 객체변수를 파라미터로 전달하는 방법
+  const PageMotion = PageMotionFunc(theme);
 
   useEffect(() => {
     const randomIndex = Math.floor(Math.random() * LifeQuotes.length);
     setRandomQuote(LifeQuotes[randomIndex]);
   }, []);
 
+  useEffect(() => {
+    if (isDarkTheme) {
+      setTheme(darkTheme);
+    } else {
+      setTheme(lightTheme);
+    }
+  }, [isDarkTheme]);
+
   function clickButton() {
     setShow((appear) => !appear);
   }
+
+  // variant 객체를 컴포넌트 안에서 선언하는 방법
+  // const PageMotion = {
+  //   start: {
+  //     border: `500px solid ${theme.textColor}`,
+  //     transition: { duration: 1.5, type: "tween" },
+  //   },
+  //   end: {
+  //     border: `0px solid ${theme.textColor}`,
+  //     transition: { duration: 1.5, type: "tween" },
+  //   },
+  // };
 
   return (
     <>
@@ -233,7 +206,6 @@ export function Homepage() {
               d="M 50 100 V 400 H 180 V 350 H 100 V 250 H 160 V 200 H 100 V 100 H 180"
               variants={draw}
               custom={1}
-              stroke={theme.textColor}
             />
 
             {/* M */}
@@ -241,7 +213,6 @@ export function Homepage() {
               d="M 250 100 V 400 H 340 V 200 H 440 V 400 H 530 V 100"
               variants={draw}
               custom={1.5}
-              stroke={theme.textColor}
             />
 
             {/* O */}
@@ -256,7 +227,6 @@ export function Homepage() {
               d="M 60 500 H 140 V 450 H 100 V 100 H 80 V 450 H 40 V 500"
               variants={draw}
               custom={2.5}
-              stroke={theme.textColor}
             />
 
             {/* I */}
@@ -264,7 +234,6 @@ export function Homepage() {
               d="M 230 500 H 310 V 450 H 270 V 100 H 250 V 450 H 210 V 500"
               variants={draw}
               custom={3}
-              stroke={theme.textColor}
             />
 
             {/* N */}
@@ -272,7 +241,6 @@ export function Homepage() {
               d="M 370 100 V 400 H 460 V 200 L 560 400 H 650 V 100"
               variants={draw}
               custom={3.5}
-              stroke={theme.textColor}
             />
           </SvgBox>
           <AnimatePresence>

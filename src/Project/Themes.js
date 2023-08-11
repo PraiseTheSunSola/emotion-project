@@ -5,6 +5,7 @@ export const lightTheme = {
   textColor: "black",
   activeColor: "red",
   hoverColor: "red",
+  ModalbackgroundColor: "white",
 };
 
 export const darkTheme = {
@@ -12,6 +13,7 @@ export const darkTheme = {
   textColor: "white",
   activeColor: "blue",
   hoverColor: "blue",
+  ModalbackgroundColor: "#2E2E2E",
 };
 
 // 이 아래에 적지 프롭스로 코딩하지 않아도

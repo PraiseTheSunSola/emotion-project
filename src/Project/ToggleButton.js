@@ -26,13 +26,13 @@ const ToggleButtonAnimation = {
   },
 };
 
-function ToggleButton({ onClick, children }) {
+function ToggleButton({ toggleTheme, children }) {
   return (
     <ToggleButtonStyled
       variants={ToggleButtonAnimation}
       initial="start"
       animate="end"
-      onClick={onClick}
+      onClick={toggleTheme}
     >
       {children}
     </ToggleButtonStyled>

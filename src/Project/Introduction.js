@@ -6,6 +6,9 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useRef } from "react";
+import { useContext } from "react";
+import { ThemeContext } from "../App";
+import { lightTheme, darkTheme } from "./Themes";
 
 const Body = createGlobalStyle`
 
@@ -31,7 +34,7 @@ const Title = styled(motion.title)`
   margin-bottom: 50px;
   z-index: 1;
   &:hover {
-    color: red;
+    color: ${(props) => props.theme.hoverColor};
     text-shadow: 6px 5px gray;
   }
 `;
@@ -42,20 +45,17 @@ const Page = styled(motion.div)`
   height: 200vh;
 `;
 
-const PageMotion = {
-  start: {
-    // "background-color": "black",
-    // clipPath:   "circle(0%)",
-    border: "500px solid black",
-    transition: { duration: 1.5, type: "tween" },
-  },
-  end: {
-    // "background-color": "black",
-    // clipPath: "circle(100%)",
-    border: "0px solid black",
-
-    transition: { duration: 1.5, type: "tween" },
-  },
+export const PageMotionFunc = (theme) => {
+  return {
+    start: {
+      border: `500px solid ${theme.textColor}`,
+      transition: { duration: 1.5, type: "tween" },
+    },
+    end: {
+      border: `0px solid ${theme.textColor}`,
+      transition: { duration: 1.5, type: "tween" },
+    },
+  };
 };
 
 const MovePageTop = styled(motion.button)`
@@ -165,11 +165,11 @@ const Item = styled(motion.button)`
 
   &:hover {
     cursor: pointer;
-    background-color: red;
+    background-color: ${(props) => props.theme.hoverColor};
   }
 
   &.active {
-    color: red;
+    color: ${(props) => props.theme.activeColor};
     box-shadow: none;
     border: 5px inset ${(props) => props.theme.textColor};
     background-color: ${(props) => props.theme.backgroundColor};
@@ -207,10 +207,12 @@ const EmotionBox = styled(motion.div)`
   height: 300px;
   margin-bottom: 40px;
   text-align: center;
+
   &:hover {
     cursor: zoom-in;
     transform: scale(1.1);
     box-shadow: 5px 5px 10px 5px;
+    background-color: ${(props) => props.theme.ModalbackgroundColor};
   }
 `;
 
@@ -245,6 +247,7 @@ const Name = styled(motion.h3)`
   margin-bottom: 5px;
   text-align: center;
   word-break: keep-all;
+  color: ${(props) => props.theme.textColor};
 `;
 
 const ModalOnOff = styled(motion.div)`
@@ -273,7 +276,7 @@ const Modal = styled(motion.div)`
   height: 700px;
   top: 55%;
   left: 50%;
-  background-color: white;
+  background-color: ${(props) => props.theme.ModalbackgroundColor};
   transform: translate(-50%, -50%);
   Img {
     width: 100%;
@@ -309,6 +312,17 @@ export function Introduction() {
   const [key, setKey] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
+  const { isDarkTheme } = useContext(ThemeContext);
+  const [theme, setTheme] = useState(darkTheme);
+  const PageMotion = PageMotionFunc(theme);
+
+  useEffect(() => {
+    if (isDarkTheme) {
+      setTheme(darkTheme);
+    } else {
+      setTheme(lightTheme);
+    }
+  }, [isDarkTheme]);
 
   const ItemClick = (i) => {
     if (isAnimating) return; // 애니메이션 중에는 클릭 불가

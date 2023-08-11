@@ -4,6 +4,9 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { EmotionControl } from "./EmotionControlDB";
 import { useEffect } from "react";
+import { useContext } from "react";
+import { ThemeContext } from "../App";
+import { lightTheme, darkTheme } from "./Themes";
 
 const Body = createGlobalStyle`
 
@@ -205,22 +208,18 @@ const Page = styled(motion.section)`
   align-items: center;
 `;
 
-const PageMotion = {
-  start: {
-    // "background-color": "black",
-    // clipPath:   "circle(0%)",
-    border: "500px solid black",
-    transition: { duration: 1.5, type: "tween" },
-  },
-  end: {
-    // "background-color": "black",
-    // clipPath: "circle(100%)",
-    border: "0px solid black",
-
-    transition: { duration: 1.5, type: "tween" },
-  },
+export const PageMotionFunc = (theme) => {
+  return {
+    start: {
+      border: `500px solid ${theme.textColor}`,
+      transition: { duration: 1.5, type: "tween" },
+    },
+    end: {
+      border: `0px solid ${theme.textColor}`,
+      transition: { duration: 1.5, type: "tween" },
+    },
+  };
 };
-
 // ---------------------------------------------------- 모달 내부
 
 const Modal = styled(motion.div)`
@@ -231,6 +230,7 @@ const Modal = styled(motion.div)`
   width: 1200px;
   height: 608px;
   border: 4px solid ${(props) => props.theme.textColor};
+  background-color: ${(props) => props.theme.ModalbackgroundColor};
   overflow: hidden;
 `;
 
@@ -292,6 +292,17 @@ export function Control() {
   const [key, setKey] = useState(0);
   const [active, setActive] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
+  const { isDarkTheme } = useContext(ThemeContext);
+  const [theme, setTheme] = useState(darkTheme);
+  const PageMotion = PageMotionFunc(theme);
+
+  useEffect(() => {
+    if (isDarkTheme) {
+      setTheme(darkTheme);
+    } else {
+      setTheme(lightTheme);
+    }
+  }, [isDarkTheme]);
 
   useEffect(() => {
     window.scrollTo(0, 0);

@@ -14,6 +14,9 @@ import {
 } from "framer-motion";
 import { useState } from "react";
 import { useEffect } from "react";
+import { lightTheme, darkTheme } from "./Themes";
+import { useContext } from "react";
+import { ThemeContext } from "../App";
 
 const Title = styled(motion.title)`
   position: absolute;
@@ -23,7 +26,7 @@ const Title = styled(motion.title)`
   margin-top: 50px;
   margin-bottom: 50px;
   &:hover {
-    color: red;
+    color: ${(props) => props.theme.hoverColor};
     text-shadow: 6px 5px gray;
   }
 `;
@@ -48,20 +51,17 @@ const Page = styled(motion.div)`
   overflow: hidden;
 `;
 
-const PageMotion = {
-  start: {
-    // "background-color": "black",
-    // clipPath:   "circle(0%)",
-    border: "500px solid black",
-    transition: { duration: 1.5, type: "tween" },
-  },
-  end: {
-    // "background-color": "black",
-    // clipPath: "circle(100%)",
-    border: "0px solid black",
-
-    transition: { duration: 1.5, type: "tween" },
-  },
+export const PageMotionFunc = (theme) => {
+  return {
+    start: {
+      border: `500px solid ${theme.textColor}`,
+      transition: { duration: 1.5, type: "tween" },
+    },
+    end: {
+      border: `0px solid ${theme.textColor}`,
+      transition: { duration: 1.5, type: "tween" },
+    },
+  };
 };
 
 const ImageBox = styled.div`
@@ -225,6 +225,21 @@ const MoveBottom = {
 
 export function Regulation() {
   const [show, setShow] = useState(false);
+  const { isDarkTheme } = useContext(ThemeContext);
+  const [theme, setTheme] = useState(darkTheme);
+  const PageMotion = PageMotionFunc(theme);
+
+  useEffect(() => {
+    if (isDarkTheme) {
+      setTheme(darkTheme);
+    } else {
+      setTheme(lightTheme);
+    }
+  }, [isDarkTheme]);
+
+  function clickButton() {
+    setShow((appear) => !appear);
+  }
 
   useEffect(() => {
     window.scrollTo(0, 0);

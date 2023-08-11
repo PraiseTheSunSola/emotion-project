@@ -1,10 +1,10 @@
 import { createGlobalStyle } from "styled-components";
 import { ThemeProvider } from "styled-components";
-import { createContext, useContext } from "react"; // ThemeContext 관련 추가
+import { createContext, useState } from "react"; // ThemeContext 관련 추가
 import { Emotion } from "./Project/Emotion";
-import { useState } from "react";
 import { lightTheme, darkTheme, GlobalStyle } from "./Project/Themes";
 import ToggleButton from "./Project/ToggleButton";
+import { useEffect } from "react";
 
 export const ThemeContext = createContext();
 
@@ -26,7 +26,7 @@ const Body = createGlobalStyle`
   };
 
 ::-webkit-scrollbar-thumb {
-  background-color: red;
+  background-color: gray;
   /* opacity: 0; */
  
      /* 스크롤바 썸네일 색상 */
@@ -50,25 +50,32 @@ body {
 `;
 
 function App() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    setIsDarkTheme(savedTheme === "darkTheme");
+    console.log(localStorage);
+  }, []); // 최초 한번만 불리도록 빈 배열로 설정
 
   const toggleTheme = () => {
-    setIsDarkMode((prevMode) => !prevMode);
-    console.log(isDarkMode);
+    const newTheme = isDarkTheme ? "lightTheme" : "darkTheme";
+    setIsDarkTheme(!isDarkTheme);
+    localStorage.setItem("theme", newTheme); // 로컬 스토리지에 테마 설정 저장
+    console.log(newTheme);
   };
 
   return (
     <>
-      <ThemeContext.Provider value={isDarkMode ? darkTheme : lightTheme}>
-        <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+      <ThemeContext.Provider value={{ isDarkTheme }}>
+        <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
           <GlobalStyle />
           <div>
-            <ToggleButton onClick={toggleTheme}>테마 변경</ToggleButton>
+            <ToggleButton toggleTheme={toggleTheme}>테마 변경</ToggleButton>
           </div>
           <Emotion />
+          <Body />
         </ThemeProvider>
-
-        <Body />
       </ThemeContext.Provider>
     </>
   );
