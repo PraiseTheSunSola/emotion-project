@@ -168,7 +168,7 @@ const MoveTopBottomButtonBox = styled(motion.div)`
 
 const MovePageTop = styled(motion.button)`
   position: fixed;
-  bottom: 5%;
+  bottom: 10%;
   left: 95%;
   width: 50px;
   height: 50px;
@@ -192,11 +192,12 @@ const MovePageBottom = styled(motion.button)`
   height: 50px;
   font-size: 40px;
   border: 0px;
-  background-color: white;
-  color: black;
-
+  background-color: ${(props) => props.theme.backgroundColor};
+  color: ${(props) => props.theme.textColor};
+  opacity: 1;
   &:hover {
     cursor: pointer;
+    opacity: 0.5;
     color: gray;
   }
 `;
@@ -456,7 +457,7 @@ export function Regulation() {
         ▲
       </MovePageTop>
 
-      {/* <MovePageBottom
+      <MovePageBottom
         variants={MoveBottom}
         initial="start"
         animate="end"
@@ -464,7 +465,7 @@ export function Regulation() {
         onClick={() => ClickMoveBottom()}
       >
         ▼
-      </MovePageBottom> */}
+      </MovePageBottom>
     </>
   );
 }
