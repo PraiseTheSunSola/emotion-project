@@ -11,8 +11,8 @@ export const lightTheme = {
 export const darkTheme = {
   backgroundColor: "black",
   textColor: "white",
-  activeColor: "blue",
-  hoverColor: "blue",
+  activeColor: "#fcdd61",
+  hoverColor: "#fcdd61",
   ModalbackgroundColor: "#2E2E2E",
 };
 
